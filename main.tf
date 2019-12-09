@@ -17,7 +17,7 @@ resource "random_id" "instance_name_suffix" {
 
 locals {
   instance_name                 = "${var.project}-${var.environment}-${random_id.instance_name_suffix.hex}"
-  sqlproxy_service_account_name = local.instance_name
+  sqlproxy_service_account_name = "${var.project}-${var.environment}"
   project_name_normalized       = replace(var.project, "-", "_")
   postgres_database_name        = local.project_name_normalized
   postgres_database_user        = local.postgres_database_name
