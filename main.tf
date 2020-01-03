@@ -66,6 +66,11 @@ resource "google_sql_database_instance" "default" {
       day  = "7"
       hour = "4"
     }
+
+    database_flags {
+      name  = "log_min_duration_statement"
+      value = "300"
+    }
   }
   depends_on = [google_project_service.enable_sqladmin_api]
 }
