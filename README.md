@@ -16,7 +16,8 @@ module "postgresql" {
   cluster_endpoint = "${module.gke.endpoint}"
   environment = "production"
   instance_tier = "db-n1-standard-1" # optional, default is db-n1-standard-1
-  availability_type = "REGIAONAL" # REGIONAL for HA setup, ZONAL for single zone
+  availability_type = "REGIONAL" # REGIONAL for HA setup, ZONAL for single zone
+  vault_secret_path = "secret/devops/${TYPE}/${var.project}/${var.environment}" # ${TYPE} should be set to internal for internal projects, external for external projects
 }
 ```
 

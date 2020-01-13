@@ -32,3 +32,5 @@ variable "instance_tier" {
 variable "availability_type" {
 }
 
+variable "vault_secret_path" {
+}
