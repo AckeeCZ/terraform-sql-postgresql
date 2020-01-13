@@ -2,8 +2,16 @@ provider "random" {
   version = "~> 2.2.1"
 }
 
+provider "google" {
+  version = "~> 2.20.0"
+}
+
+provider "vault" {
+  version = "~> 2.7.1"
+}
+
 provider "kubernetes" {
-  version                = "1.9.0"
+  version                = "1.10.0"
   load_config_file       = false
   host                   = "https://${var.cluster_endpoint}"
   username               = var.cluster_user
