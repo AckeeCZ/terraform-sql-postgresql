@@ -3,7 +3,7 @@ resource "vault_generic_secret" "default" {
   data_json = <<EOT
 {
   "postgres": "${google_sql_user.postgres.password}",
-  "local.postgres_database_user": "${google_sql_user.default.password}"
+  "${local.postgres_database_user}": "${google_sql_user.default.password}"
 }
 EOT
 }
