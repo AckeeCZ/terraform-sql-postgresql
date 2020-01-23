@@ -25,7 +25,7 @@ resource "random_id" "instance_name_suffix" {
 
 locals {
   instance_name                 = "${var.project}-${var.environment}-${random_id.instance_name_suffix.hex}"
-  sqlproxy_service_account_name = substr("${var.project}-sqlproxy-${var.environment}", 0, 30)
+  sqlproxy_service_account_name = substr("sqlproxy-postgres-${var.environment}", 0, 30)
   project_name_normalized       = replace(var.project, "-", "_")
   postgres_database_name        = local.project_name_normalized
   postgres_database_user        = local.postgres_database_name
@@ -39,6 +39,7 @@ resource "google_project_service" "enable_sqladmin_api" {
 resource "google_service_account" "sqlproxy" {
   account_id   = local.sqlproxy_service_account_name
   display_name = local.sqlproxy_service_account_name
+  description  = "SA for PostgreSQL sqlproxy. Automatically created by terraform-postgresql module."
   project      = var.project
 }
 
