@@ -37,7 +37,7 @@ resource "google_project_service" "enable_sqladmin_api" {
 }
 
 resource "google_service_account" "sqlproxy" {
-  account_id   = local.sqlproxy_service_account_name
+  account_id   = substr(local.sqlproxy_service_account_name, 0, 30)
   display_name = local.sqlproxy_service_account_name
   description  = "SA for PostgreSQL sqlproxy. Automatically created by terraform-postgresql module."
   project      = var.project
