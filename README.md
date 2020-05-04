@@ -23,7 +23,7 @@ module "postgresql" {
 
 ## Dependencies
 
-GKE module : https://gitlab.ack.ee/Infra/terraform-gke
+GKE module : https://gitlab.ack.ee/Infra/terraform-gke-vpc
 
 ## Example SQL proxy specification
 
