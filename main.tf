@@ -3,7 +3,7 @@ provider "random" {
 }
 
 provider "google" {
-  version = "~> 2.20.0"
+  version = "~> 3.19.0"
 }
 
 provider "vault" {
