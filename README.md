@@ -1,10 +1,12 @@
-# Terraform Google Cloud SQL Postgres module
+# Terraform Google Cloud SQL Postgres module with K8s secret deploy
+
+Terraform module for provisioning GCP SQL Postgres database. It should also deploy the username and password to K8s
+as a secret. That could be used in setting up cloudsql proxy pod. 
 
 ## Usage
 
 ```hcl
 module "postgresql" {
-  name = "postgresql"
   source = "git::ssh://git@gitlab.ack.ee/Infra/terraform-postgresql.git?ref=v1.0.0"
   project = "${var.project}"
   region = "${var.region}"
@@ -21,10 +23,56 @@ module "postgresql" {
 }
 ```
 
+## Before you do anything in this module
+
+Install pre-commit hooks by running following commands:
+
+```shell script
+brew install pre-commit terraform-docs
+pre-commit install
+```
+
 ## Dependencies
 
-GKE module : https://gitlab.ack.ee/Infra/terraform-gke-vpc
+GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 
 ## Example SQL proxy specification
 
 [proxy.yaml](https://gitlab.ack.ee/Ackee/infrastruktura-templates/blob/master/k8s/production/services/proxy.yaml) in infrastuktura-template repo
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| google | ~> 3.19.0 |
+| kubernetes | ~> 1.11.0 |
+| random | ~> 2.2.1 |
+| vault | ~> 2.7.1 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:-----:|
+| availability\_type | The availability type of the Cloud SQL instance, high availability (REGIONAL) or single zone (ZONAL) | `string` | `"ZONAL"` | no |
+| cluster\_ca\_certificate | Public CA certificate that is the root of trust for the GKE K8s cluster | `string` | n/a | yes |
+| cluster\_endpoint | Cluster control plane endpoint | `string` | n/a | yes |
+| cluster\_pass | Cluster master password, keep always secret! | `string` | n/a | yes |
+| cluster\_user | Cluster master username, keep always secret! | `string` | n/a | yes |
+| environment | Project enviroment, e.g. stage, production and development | `string` | `"development"` | no |
+| instance\_tier | The machine type to use | `string` | `"db-custom-1-3840"` | no |
+| namespace | K8s namespace to where insert Cloud SQL credentials secrets | `string` | `"production"` | no |
+| project | GCP project name | `string` | n/a | yes |
+| region | GCP region | `string` | `"europe-west3"` | no |
+| vault\_secret\_path | Path to secret in local vault, used mainly to save gke credentials | `string` | n/a | yes |
+| zone | The preferred compute engine zone | `string` | `"europe-west3-c"` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| postgres\_default\_password | PSQL password to default user |
+| postgres\_instance\_name | PSQL instance name |
+| postgres\_postgres\_password | PSQL password to postgres user |
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
