@@ -63,3 +63,15 @@ variable "vault_secret_path" {
   description = "Path to secret in local vault, used mainly to save gke credentials"
   type        = string
 }
+
+variable "private_ip" {
+  description = "If set to true, private IP address will get allocated and connect it to VPC network set in `var.network` in the project -- once enabled, this can't be turned off."
+  default     = false
+  type        = bool
+}
+
+variable "network" {
+  description = "GCE VPC used for possible private IP addresses"
+  default     = "default"
+  type        = string
+}

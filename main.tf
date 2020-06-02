@@ -1,22 +1,5 @@
-provider "random" {
-  version = "~> 2.2.1"
-}
-
-provider "google" {
-  version = "~> 3.19.0"
-}
-
-provider "vault" {
-  version = "~> 2.7.1"
-}
-
-provider "kubernetes" {
-  version                = "~> 1.11.0"
-  load_config_file       = false
-  host                   = "https://${var.cluster_endpoint}"
-  username               = var.cluster_user
-  password               = var.cluster_pass
-  cluster_ca_certificate = var.cluster_ca_certificate
+data "google_compute_network" "default" {
+  name = var.network
 }
 
 resource "random_id" "instance_name_suffix" {
@@ -53,6 +36,30 @@ resource "google_service_account_key" "sqlproxy" {
   service_account_id = google_service_account.sqlproxy.name
 }
 
+resource "google_project_service" "enable-servicenetworking-api" {
+  service = "servicenetworking.googleapis.com"
+  project = var.project
+
+  disable_on_destroy = false
+  count              = var.private_ip ? 1 : 0
+}
+
+resource "google_compute_global_address" "psql_private_ip_address" {
+  name          = "${local.instance_name}-ip-address"
+  purpose       = "VPC_PEERING"
+  address_type  = "INTERNAL"
+  prefix_length = 16
+  network       = data.google_compute_network.default.self_link
+  count         = var.private_ip ? 1 : 0
+}
+
+resource "google_service_networking_connection" "private_vpc_connection" {
+  network                 = data.google_compute_network.default.self_link
+  service                 = "servicenetworking.googleapis.com"
+  reserved_peering_ranges = [google_compute_global_address.psql_private_ip_address[0].name]
+  count                   = var.private_ip ? 1 : 0
+}
+
 resource "google_sql_database_instance" "default" {
   name             = local.instance_name
   database_version = "POSTGRES_11"
@@ -80,6 +87,11 @@ resource "google_sql_database_instance" "default" {
       name  = "log_min_duration_statement"
       value = "300"
     }
+
+    ip_configuration {
+      private_network = var.private_ip ? data.google_compute_network.default.self_link : null
+    }
+
   }
   depends_on = [google_project_service.enable_sqladmin_api]
 }
