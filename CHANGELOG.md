@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.8.0] - 2020-06-02
+### Add
+- Add pre-commit hooks for automatic documentation
+- Add description on outputs and variables
+- Add example on how to use the module
+
 ## [v2.7.0] - 2020-05-04
 ### Changed
 - Upgrade Google GA provider lock to `~> 3.19.0`. Note: this upgrade should need upgrade of other TF modules to satisfy same version of `google` provider. For compatible versions, see: https://redmine.ack.ee/issues/43227#note-11
