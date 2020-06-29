@@ -9,9 +9,10 @@ module "postgresql" {
   cluster_pass           = module.gke.cluster_password
   cluster_endpoint       = module.gke.endpoint
   environment            = "production"
-  instance_tier          = "db-n1-standard-1" # optional, default is db-n1-standard-1
-  availability_type      = "REGIONAL"         # REGIONAL for HA setup, ZONAL for single zone
+  availability_type      = "REGIONAL" # REGIONAL for HA setup, ZONAL for single zone
   vault_secret_path      = "secret/devops/production/${var.project}/${var.environment}"
+  enable_local_access    = true
+  private_ip             = true
 }
 
 module "gke" {
@@ -23,6 +24,25 @@ module "gke" {
   private           = false
   min_nodes         = 1
   max_nodes         = 2
+}
+
+provider "postgresql" {
+  host            = module.postgresql.postgres_instance_ip_settings.0.ip_address
+  port            = 5432
+  database        = replace(var.project, "-", "_")
+  username        = replace(var.project, "-", "_")
+  password        = module.postgresql.postgres_default_password
+  sslmode         = "require"
+  connect_timeout = 15
+}
+
+resource "postgresql_extension" "pg_trgm" {
+  name       = "pg_trgm"
+  depends_on = [module.postgresql.postgres_instance_ip_settings]
+}
+
+output "psql_ip" {
+  value = module.postgresql.postgres_instance_ip_settings.0.ip_address
 }
 
 variable "environment" {

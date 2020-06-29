@@ -12,3 +12,8 @@ output "postgres_instance_name" {
   description = "PSQL instance name"
   value       = google_sql_database_instance.default.name
 }
+
+output "postgres_instance_ip_settings" {
+  description = "PSQL instance IP address settings"
+  value       = google_sql_database_instance.default.ip_address
+}

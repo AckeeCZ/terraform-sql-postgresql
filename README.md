@@ -41,11 +41,22 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 [proxy.yaml](https://gitlab.ack.ee/Ackee/infrastruktura-templates/blob/master/k8s/production/services/proxy.yaml) in infrastuktura-template repo
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12 |
+| google | ~> 3.19.0 |
+| kubernetes | ~> 1.11.0 |
+| random | ~> 2.2.1 |
+| vault | ~> 2.7.1 |
+
 ## Providers
 
 | Name | Version |
 |------|---------|
 | google | ~> 3.19.0 |
+| http | n/a |
 | kubernetes | ~> 1.11.0 |
 | random | ~> 2.2.1 |
 | vault | ~> 2.7.1 |
@@ -53,16 +64,20 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | availability\_type | The availability type of the Cloud SQL instance, high availability (REGIONAL) or single zone (ZONAL) | `string` | `"ZONAL"` | no |
 | cluster\_ca\_certificate | Public CA certificate that is the root of trust for the GKE K8s cluster | `string` | n/a | yes |
 | cluster\_endpoint | Cluster control plane endpoint | `string` | n/a | yes |
 | cluster\_pass | Cluster master password, keep always secret! | `string` | n/a | yes |
 | cluster\_user | Cluster master username, keep always secret! | `string` | n/a | yes |
+| enable\_local\_access | Enable access from your local public IP to allow some postprocess PSQL operations | `bool` | `false` | no |
 | environment | Project enviroment, e.g. stage, production and development | `string` | `"development"` | no |
 | instance\_tier | The machine type to use | `string` | `"db-custom-1-3840"` | no |
 | namespace | K8s namespace to where insert Cloud SQL credentials secrets | `string` | `"production"` | no |
+| network | GCE VPC used for possible private IP addresses | `string` | `"default"` | no |
+| private\_ip | If set to true, private IP address will get allocated and connect it to VPC network set in `var.network` in the project -- once enabled, this can't be turned off. | `bool` | `false` | no |
 | project | GCP project name | `string` | n/a | yes |
+| public\_ip | If set to true, public IP address will get allocated | `bool` | `false` | no |
 | region | GCP region | `string` | `"europe-west3"` | no |
 | vault\_secret\_path | Path to secret in local vault, used mainly to save gke credentials | `string` | n/a | yes |
 | zone | The preferred compute engine zone | `string` | `"europe-west3-c"` | no |
@@ -72,6 +87,7 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 | Name | Description |
 |------|-------------|
 | postgres\_default\_password | PSQL password to default user |
+| postgres\_instance\_ip\_settings | PSQL instance IP address settings |
 | postgres\_instance\_name | PSQL instance name |
 | postgres\_postgres\_password | PSQL password to postgres user |
 

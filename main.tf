@@ -6,6 +6,13 @@ resource "random_id" "instance_name_suffix" {
   byte_length = 4
 }
 
+data "http" "myip" {
+  url = "https://api.myip.com/"
+  request_headers = {
+    Accept = "application/json"
+  }
+}
+
 locals {
   instance_name                 = "${var.project}-${var.environment}-${random_id.instance_name_suffix.hex}"
   sqlproxy_service_account_name = substr("sqlproxy-postgres-${var.environment}", 0, 30)
@@ -90,8 +97,16 @@ resource "google_sql_database_instance" "default" {
 
     ip_configuration {
       private_network = var.private_ip ? data.google_compute_network.default.self_link : null
-    }
+      ipv4_enabled    = var.enable_local_access || var.public_ip ? true : false
 
+      dynamic "authorized_networks" {
+        for_each = var.enable_local_access ? [1] : []
+        content {
+          name  = "local_tf_connection"
+          value = "${chomp(jsondecode(data.http.myip.body).ip)}/32"
+        }
+      }
+    }
   }
   depends_on = [google_project_service.enable_sqladmin_api]
 }
