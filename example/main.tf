@@ -13,6 +13,12 @@ module "postgresql" {
   vault_secret_path      = "secret/devops/production/${var.project}/${var.environment}"
   enable_local_access    = true
   private_ip             = true
+  authorized_networks = [
+    {
+      name : "office"
+      cidr : "1.2.3.4/31"
+    }
+  ]
 }
 
 module "gke" {
