@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.10.0] - 2020-07-02
+### Added
+- Add public ip to enable access to psql for external terraform provider
+
 ## [v2.9.0] - 2020-06-02
 ### Added
 - Add a k8s service named `cloudsql` if `var.private_ip` is set to `true` targeting the private IP address of Cloud SQL
