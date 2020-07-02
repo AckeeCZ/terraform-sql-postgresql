@@ -70,8 +70,20 @@ variable "private_ip" {
   type        = bool
 }
 
+variable "public_ip" {
+  description = "If set to true, public IP address will get allocated"
+  default     = false
+  type        = bool
+}
+
 variable "network" {
   description = "GCE VPC used for possible private IP addresses"
   default     = "default"
   type        = string
+}
+
+variable "enable_local_access" {
+  description = "Enable access from your local public IP to allow some postprocess PSQL operations"
+  default     = false
+  type        = bool
 }
