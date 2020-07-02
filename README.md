@@ -65,6 +65,7 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| authorized\_networks | List of maps of strings authorized networks allowed to connect to Cloud SQL instance, example: [{name: the\_office, cidr: 1.2.3.4/31}] | `list(map(string))` | `[]` | no |
 | availability\_type | The availability type of the Cloud SQL instance, high availability (REGIONAL) or single zone (ZONAL) | `string` | `"ZONAL"` | no |
 | cluster\_ca\_certificate | Public CA certificate that is the root of trust for the GKE K8s cluster | `string` | n/a | yes |
 | cluster\_endpoint | Cluster control plane endpoint | `string` | n/a | yes |

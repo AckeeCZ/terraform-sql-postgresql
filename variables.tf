@@ -87,3 +87,9 @@ variable "enable_local_access" {
   default     = false
   type        = bool
 }
+
+variable "authorized_networks" {
+  description = "List of maps of strings authorized networks allowed to connect to Cloud SQL instance, example: [{name: the_office, cidr: 1.2.3.4/31}]"
+  default     = []
+  type        = list(map(string))
+}

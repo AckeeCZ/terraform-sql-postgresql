@@ -106,6 +106,13 @@ resource "google_sql_database_instance" "default" {
           value = "${chomp(jsondecode(data.http.myip.body).ip)}/32"
         }
       }
+      dynamic "authorized_networks" {
+        for_each = var.authorized_networks
+        content {
+          name  = authorized_networks.value.name
+          value = authorized_networks.value.cidr
+        }
+      }
     }
   }
   depends_on = [google_project_service.enable_sqladmin_api]
