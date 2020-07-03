@@ -12,7 +12,7 @@ resource "kubernetes_endpoints" "cloudsql" {
     }
 
     port {
-      port = 3306
+      port = 5432
     }
   }
 }
@@ -27,8 +27,8 @@ resource "kubernetes_service" "cloudsql" {
 
   spec {
     port {
-      port        = 3306
-      target_port = 3306
+      port        = 5432
+      target_port = 5432
     }
   }
 }
