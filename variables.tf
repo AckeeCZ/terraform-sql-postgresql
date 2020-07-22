@@ -70,6 +70,11 @@ variable "private_ip" {
   type        = bool
 }
 
+variable "sqlproxy_dependencies" {
+  description = "If set to true, we will create dependencies for running SQLproxy - GCP IAM SA, Kubernetes secret and Kubernetes Service"
+  default     = true
+  type        = bool
+}
 variable "public_ip" {
   description = "If set to true, public IP address will get allocated"
   default     = false
