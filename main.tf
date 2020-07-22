@@ -31,16 +31,19 @@ resource "google_service_account" "sqlproxy" {
   display_name = local.sqlproxy_service_account_name
   description  = "SA for PostgreSQL sqlproxy. Automatically created by terraform-postgresql module."
   project      = var.project
+  count        = var.sqlproxy_dependencies ? 1 : 0
 }
 
 resource "google_project_iam_member" "sqlproxy_role" {
   role    = "roles/cloudsql.client"
-  member  = "serviceAccount:${google_service_account.sqlproxy.email}"
+  member  = "serviceAccount:${google_service_account.sqlproxy[0].email}"
   project = var.project
+  count   = var.sqlproxy_dependencies ? 1 : 0
 }
 
 resource "google_service_account_key" "sqlproxy" {
-  service_account_id = google_service_account.sqlproxy.name
+  service_account_id = google_service_account.sqlproxy[0].name
+  count              = var.sqlproxy_dependencies ? 1 : 0
 }
 
 resource "google_project_service" "enable-servicenetworking-api" {
@@ -161,7 +164,7 @@ resource "kubernetes_secret" "sqlproxy" {
 
   data = {
     SQL_CONNECTION_NAME     = google_sql_database_instance.default.connection_name
-    GCP_SERVICE_ACCOUNT_KEY = base64decode(google_service_account_key.sqlproxy.private_key)
+    GCP_SERVICE_ACCOUNT_KEY = base64decode(google_service_account_key.sqlproxy[0].private_key)
   }
 }
 

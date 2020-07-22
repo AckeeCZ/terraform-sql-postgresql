@@ -1,13 +1,13 @@
 # Terraform Google Cloud SQL Postgres module with K8s secret deploy
 
 Terraform module for provisioning GCP SQL Postgres database. It should also deploy the username and password to K8s
-as a secret. That could be used in setting up cloudsql proxy pod. 
+as a secret. That could be used in setting up cloudsql proxy pod.
 
 ## Usage
 
 ```hcl
 module "postgresql" {
-  source = "git::ssh://git@gitlab.ack.ee/Infra/terraform-postgresql.git?ref=v1.0.0"
+  source = "git::ssh://git@gitlab.ack.ee/Infra/terraform-postgresql.git?ref=v2.11.0"
   project = "${var.project}"
   region = "${var.region}"
   zone = "${var.zone}"
@@ -19,7 +19,7 @@ module "postgresql" {
   environment = "production"
   instance_tier = "db-n1-standard-1" # optional, default is db-n1-standard-1
   availability_type = "REGIONAL" # REGIONAL for HA setup, ZONAL for single zone
-  vault_secret_path = "secret/devops/${TYPE}/${var.project}/${var.environment}" # ${TYPE} should be set to internal for internal projects, external for external projects
+  vault_secret_path = "secret/devops/generated/${TYPE}/${var.project}/${var.environment}" # ${TYPE} should be set to internal for internal projects, external for external projects
 }
 ```
 
@@ -80,6 +80,7 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 | project | GCP project name | `string` | n/a | yes |
 | public\_ip | If set to true, public IP address will get allocated | `bool` | `false` | no |
 | region | GCP region | `string` | `"europe-west3"` | no |
+| sqlproxy\_dependencies | If set to true, we will create dependencies for running SQLproxy - GCP IAM SA, Kubernetes secret and Kubernetes Service | `bool` | `true` | no |
 | vault\_secret\_path | Path to secret in local vault, used mainly to save gke credentials | `string` | n/a | yes |
 | zone | The preferred compute engine zone | `string` | `"europe-west3-c"` | no |
 
