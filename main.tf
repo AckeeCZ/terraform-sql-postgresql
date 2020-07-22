@@ -166,5 +166,7 @@ resource "kubernetes_secret" "sqlproxy" {
     SQL_CONNECTION_NAME     = google_sql_database_instance.default.connection_name
     GCP_SERVICE_ACCOUNT_KEY = base64decode(google_service_account_key.sqlproxy[0].private_key)
   }
+  count = var.sqlproxy_dependencies ? 1 : 0
+
 }
 
