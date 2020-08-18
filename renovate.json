@@ -1,0 +1,3 @@
+{
+  "extends": "local>Infra/renovate:infra"
+}
