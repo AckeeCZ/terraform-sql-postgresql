@@ -46,20 +46,16 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12 |
-| google | ~> 3.19.0 |
-| kubernetes | ~> 1.11.0 |
-| random | ~> 2.3.0 |
-| vault | ~> 2.7.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| google | ~> 3.19.0 |
+| google | n/a |
 | http | n/a |
-| kubernetes | ~> 1.11.0 |
-| random | ~> 2.3.0 |
-| vault | ~> 2.7.1 |
+| kubernetes | n/a |
+| random | n/a |
+| vault | n/a |
 
 ## Inputs
 
