@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.13.0] - 2020-09-17
+### Changed
+- Remove providers locking - this should be done in main module in infrastructure repo from now on.
+- Add locking to `example/main.tf`
+- Remove executable permissions from `example/spinup_testing.sh` - it should never be run directly, but must be used with `source` cmd
+
 ## [v2.12.1] - 2020-09-10
 ### Changed
 - Upgrade random provider lock to `~> 2.3.0`

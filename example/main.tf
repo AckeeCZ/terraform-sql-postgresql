@@ -1,3 +1,32 @@
+provider "random" {
+  version = "~> 2.3.0"
+}
+
+provider "google" {
+  version = "~> 3.39.0"
+}
+
+provider "google-beta" {
+  version = "~> 3.39.0"
+}
+
+provider "vault" {
+  version = "~> 2.14.0"
+}
+
+provider "kubernetes" {
+  version = "~> 1.13.2"
+}
+
+provider "helm" {
+  version = "~> 1.1"
+}
+
+provider "http" {
+  version = "~> 1.2"
+}
+
+
 module "postgresql" {
   source                 = "../"
   project                = var.project
@@ -22,7 +51,7 @@ module "postgresql" {
 }
 
 module "gke" {
-  source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v6.4.0"
+  source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v7.2.0"
   namespace         = var.namespace
   project           = var.project
   location          = var.zone
@@ -33,6 +62,7 @@ module "gke" {
 }
 
 provider "postgresql" {
+  version         = "~> 1.7"
   host            = module.postgresql.postgres_instance_ip_settings.0.ip_address
   port            = 5432
   database        = replace(var.project, "-", "_")
