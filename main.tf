@@ -1,3 +1,9 @@
+locals {
+  database_flags = merge({
+    log_min_duration_statement : "300"
+  }, var.database_flags)
+}
+
 data "google_compute_network" "default" {
   name = var.network
 }
@@ -93,9 +99,12 @@ resource "google_sql_database_instance" "default" {
       hour = "4"
     }
 
-    database_flags {
-      name  = "log_min_duration_statement"
-      value = "300"
+    dynamic "database_flags" {
+      for_each = local.database_flags
+      content {
+        name  = database_flags.key
+        value = database_flags.value
+      }
     }
 
     ip_configuration {
@@ -139,10 +148,20 @@ resource "google_sql_database_instance" "read_replica" {
     backup_configuration {
       enabled = false
     }
+
+    dynamic "database_flags" {
+      for_each = local.database_flags
+      content {
+        name  = database_flags.key
+        value = database_flags.value
+      }
+    }
+
     ip_configuration {
       ipv4_enabled    = lookup(each.value, "ipv4_enabled", false)
       private_network = var.private_ip ? data.google_compute_network.default.self_link : null
     }
+
     location_preference {
       zone = lookup(each.value, "zone", var.zone)
     }

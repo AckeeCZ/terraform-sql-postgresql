@@ -62,6 +62,9 @@ module "postgresql" {
       zone          = "europe-west3-b"
     },
   }
+  database_flags = {
+    log_connections : "on"
+  }
 }
 
 module "gke" {

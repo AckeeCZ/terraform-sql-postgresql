@@ -89,6 +89,7 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 | cluster\_endpoint | Cluster control plane endpoint | `string` | n/a | yes |
 | cluster\_pass | Cluster master password, keep always secret! | `string` | n/a | yes |
 | cluster\_user | Cluster master username, keep always secret! | `string` | n/a | yes |
+| database\_flags | The optional settings.database\_flags list of values, where key is name and value is value from documentation: https://www.terraform.io/docs/providers/google/r/sql_database_instance.html | `map(string)` | `{}` | no |
 | db\_version | Database version | `string` | `"POSTGRES_11"` | no |
 | enable\_local\_access | Enable access from your local public IP to allow some postprocess PSQL operations | `bool` | `false` | no |
 | environment | Project enviroment, e.g. stage, production and development | `string` | `"development"` | no |
