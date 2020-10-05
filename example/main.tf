@@ -42,16 +42,31 @@ module "postgresql" {
   vault_secret_path      = "secret/devops/production/${var.project}/${var.environment}"
   enable_local_access    = true
   private_ip             = true
+  public_ip              = true
+  sqlproxy_dependencies  = false
   authorized_networks = [
     {
       name : "office"
       cidr : "1.2.3.4/31"
     }
   ]
+  read_replicas = {
+    replica-a : {
+      instance_tier = "db-custom-1-3840"
+      ipv4_enabled  = false
+      zone          = "europe-west3-a"
+    },
+    replica-b : {
+      instance_tier = "db-custom-1-3840"
+      ipv4_enabled  = false
+      zone          = "europe-west3-b"
+    },
+  }
 }
 
 module "gke" {
   source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v7.2.0"
+  cluster_name      = "postgresql-cluster-test"
   namespace         = var.namespace
   project           = var.project
   location          = var.zone
@@ -59,22 +74,6 @@ module "gke" {
   private           = false
   min_nodes         = 1
   max_nodes         = 2
-}
-
-provider "postgresql" {
-  version         = "~> 1.7"
-  host            = module.postgresql.postgres_instance_ip_settings.0.ip_address
-  port            = 5432
-  database        = replace(var.project, "-", "_")
-  username        = replace(var.project, "-", "_")
-  password        = module.postgresql.postgres_default_password
-  sslmode         = "require"
-  connect_timeout = 15
-}
-
-resource "postgresql_extension" "pg_trgm" {
-  name       = "pg_trgm"
-  depends_on = [module.postgresql.postgres_instance_ip_settings]
 }
 
 output "psql_ip" {

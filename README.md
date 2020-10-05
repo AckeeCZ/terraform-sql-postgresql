@@ -20,8 +20,30 @@ module "postgresql" {
   instance_tier = "db-n1-standard-1" # optional, default is db-n1-standard-1
   availability_type = "REGIONAL" # REGIONAL for HA setup, ZONAL for single zone
   vault_secret_path = "secret/devops/generated/${TYPE}/${var.project}/${var.environment}" # ${TYPE} should be set to internal for internal projects, external for external projects
+  read_replicas = {
+    replica-a : {
+      instance_tier = "db-custom-1-3840"
+      ipv4_enabled  = false
+      zone          = "europe-west3-a"
+    },
+    replica-b : {
+      instance_tier = "db-custom-1-3840"
+      ipv4_enabled  = false
+      zone          = "europe-west3-b"
+    },
+  }
 }
 ```
+
+## Read replicas
+
+Read replicas are configured from `read_replicas` parameter map. Key serve as replica name, it is appended to primary's `instance_name` local variable.
+
+Every read replica have three three parameters:
+* `instance_tier`: Instance type for replica, equivalent of primary's `instance_tier` parameter.
+* `ipv4_enabled`: Availability of public IP address on replica, equivalent of primary's `ipv4_enabled` parameter.
+* `zone`: Zone where read replicas is deployed. This is bit different from primary's `zone` parameter. On primary instance, we define "prefered location"
+- HA instance will change it's location in case of failover, but read replicas have zone "hard set".
 
 ## Before you do anything in this module
 
@@ -67,6 +89,7 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 | cluster\_endpoint | Cluster control plane endpoint | `string` | n/a | yes |
 | cluster\_pass | Cluster master password, keep always secret! | `string` | n/a | yes |
 | cluster\_user | Cluster master username, keep always secret! | `string` | n/a | yes |
+| db\_version | Database version | `string` | `"POSTGRES_11"` | no |
 | enable\_local\_access | Enable access from your local public IP to allow some postprocess PSQL operations | `bool` | `false` | no |
 | environment | Project enviroment, e.g. stage, production and development | `string` | `"development"` | no |
 | instance\_tier | The machine type to use | `string` | `"db-custom-1-3840"` | no |
@@ -75,6 +98,7 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 | private\_ip | If set to true, private IP address will get allocated and connect it to VPC network set in `var.network` in the project -- once enabled, this can't be turned off. | `bool` | `false` | no |
 | project | GCP project name | `string` | n/a | yes |
 | public\_ip | If set to true, public IP address will get allocated | `bool` | `false` | no |
+| read\_replicas | Map of maps containing name as a key of read\_replicas mapa and settings some parameters of read replica. For more information see README part Read replica | `map` | `{}` | no |
 | region | GCP region | `string` | `"europe-west3"` | no |
 | sqlproxy\_dependencies | If set to true, we will create dependencies for running SQLproxy - GCP IAM SA, Kubernetes secret and Kubernetes Service | `bool` | `true` | no |
 | vault\_secret\_path | Path to secret in local vault, used mainly to save gke credentials | `string` | n/a | yes |

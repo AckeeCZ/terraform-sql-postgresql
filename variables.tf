@@ -98,3 +98,14 @@ variable "authorized_networks" {
   default     = []
   type        = list(map(string))
 }
+
+variable "read_replicas" {
+  description = "Map of maps containing name as a key of read_replicas mapa and settings some parameters of read replica. For more information see README part Read replica"
+  default     = {}
+}
+
+variable "db_version" {
+  description = "Database version"
+  default     = "POSTGRES_11"
+  type        = string
+}

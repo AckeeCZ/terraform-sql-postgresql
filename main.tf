@@ -72,7 +72,7 @@ resource "google_service_networking_connection" "private_vpc_connection" {
 
 resource "google_sql_database_instance" "default" {
   name             = local.instance_name
-  database_version = "POSTGRES_11"
+  database_version = var.db_version
   region           = var.region
 
   settings {
@@ -119,6 +119,35 @@ resource "google_sql_database_instance" "default" {
     }
   }
   depends_on = [google_project_service.enable_sqladmin_api]
+}
+
+resource "google_sql_database_instance" "read_replica" {
+  for_each             = var.read_replicas
+  name                 = "${google_sql_database_instance.default.name}-${each.key}"
+  master_instance_name = google_sql_database_instance.default.name
+  region               = var.region
+  database_version     = var.db_version
+
+  replica_configuration {
+    failover_target = false
+  }
+
+  settings {
+    tier              = lookup(each.value, "instance_tier", "db-custom-1-3840")
+    availability_type = "ZONAL"
+
+    backup_configuration {
+      enabled = false
+    }
+    ip_configuration {
+      ipv4_enabled    = lookup(each.value, "ipv4_enabled", false)
+      private_network = var.private_ip ? data.google_compute_network.default.self_link : null
+    }
+    location_preference {
+      zone = lookup(each.value, "zone", var.zone)
+    }
+  }
+  depends_on = [google_sql_database_instance.default]
 }
 
 resource "random_password" "postgres_postgres" {
