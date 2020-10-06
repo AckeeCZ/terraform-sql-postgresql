@@ -109,3 +109,9 @@ variable "db_version" {
   default     = "POSTGRES_11"
   type        = string
 }
+
+variable "database_flags" {
+  description = "The optional settings.database_flags list of values, where key is name and value is value from documentation: https://www.terraform.io/docs/providers/google/r/sql_database_instance.html"
+  default     = {}
+  type        = map(string)
+}
