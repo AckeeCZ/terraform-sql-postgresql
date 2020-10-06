@@ -34,8 +34,7 @@ module "postgresql" {
   zone                   = var.zone
   namespace              = var.namespace
   cluster_ca_certificate = module.gke.cluster_ca_certificate
-  cluster_user           = module.gke.cluster_username
-  cluster_pass           = module.gke.cluster_password
+  cluster_token          = module.gke.access_token
   cluster_endpoint       = module.gke.endpoint
   environment            = "production"
   availability_type      = "REGIONAL" # REGIONAL for HA setup, ZONAL for single zone
