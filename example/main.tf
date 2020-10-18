@@ -23,7 +23,7 @@ provider "helm" {
 }
 
 provider "http" {
-  version = "~> 1.2"
+  version = "~> 2.0"
 }
 
 
