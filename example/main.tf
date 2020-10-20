@@ -51,15 +51,15 @@ module "postgresql" {
     }
   ]
   read_replicas = {
-    replica-a : {
+    replica-d : {
       instance_tier = "db-custom-1-3840"
       ipv4_enabled  = false
       zone          = "europe-west3-a"
     },
-    replica-b : {
+    replica-y : {
       instance_tier = "db-custom-1-3840"
       ipv4_enabled  = false
-      zone          = "europe-west3-b"
+      zone          = "europe-west3-c"
     },
   }
   database_flags = {
@@ -75,7 +75,7 @@ module "gke" {
   location          = var.zone
   vault_secret_path = var.vault_secret_path
   private           = false
-  min_nodes         = 1
+  min_nodes         = 2
   max_nodes         = 2
 }
 
