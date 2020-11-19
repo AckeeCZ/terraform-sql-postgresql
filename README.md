@@ -39,10 +39,11 @@ module "postgresql" {
 
 Read replicas are configured from `read_replicas` parameter map. Key serve as replica name, it is appended to primary's `instance_name` local variable.
 
-Every read replica have three three parameters:
+Every read replica have four parameters:
 * `instance_tier`: Instance type for replica, equivalent of primary's `instance_tier` parameter.
 * `ipv4_enabled`: Availability of public IP address on replica, equivalent of primary's `ipv4_enabled` parameter.
 * `zone`: Zone where read replicas is deployed. This is bit different from primary's `zone` parameter. On primary instance, we define "prefered location"
+* `authorized_networks`: List of maps of strings authorized networks allowed to connect to Cloud SQL Read Replica Instance, example: [{name: the_office, cidr: 1.2.3.4/31}] This parameter is `optional`.
 - HA instance will change it's location in case of failover, but read replicas have zone "hard set".
 
 ## Before you do anything in this module
