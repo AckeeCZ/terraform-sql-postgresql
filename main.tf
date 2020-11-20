@@ -158,8 +158,17 @@ resource "google_sql_database_instance" "read_replica" {
     }
 
     ip_configuration {
+
       ipv4_enabled    = lookup(each.value, "ipv4_enabled", false)
       private_network = var.private_ip ? data.google_compute_network.default.self_link : null
+
+      dynamic "authorized_networks" {
+        for_each = lookup(each.value, "authorized_networks", [])
+        content {
+          name  = authorized_networks.value["name"]
+          value = authorized_networks.value["cidr"]
+        }
+      }
     }
 
     location_preference {
@@ -217,4 +226,3 @@ resource "kubernetes_secret" "sqlproxy" {
   count = var.sqlproxy_dependencies ? 1 : 0
 
 }
-

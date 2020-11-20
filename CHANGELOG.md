@@ -4,8 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.16.0] - 2020-11-20
+### Added
+- Parameter `authorized_networks` allows to add auth-networks on read replicas.
+
 ## [v2.15.0] - 2020-10-05
-### Add
+### Added
 - Add input variable `database_flags` to enable Cloud SQL flags
 
 ## [v2.14.0] - 2020-09-17
@@ -49,7 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 instance. Prefer this setting if your use-case allows that instead of the Cloud SQL proxy.
 
 ## [v2.8.0] - 2020-06-02
-### Add
+### Added
 - Add pre-commit hooks for automatic documentation
 - Add description on outputs and variables
 - Add example on how to use the module
