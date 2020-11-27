@@ -28,8 +28,9 @@ locals {
 }
 
 resource "google_project_service" "enable_sqladmin_api" {
-  service = "sqladmin.googleapis.com"
-  project = var.project
+  service            = "sqladmin.googleapis.com"
+  project            = var.project
+  disable_on_destroy = false
 }
 
 resource "google_service_account" "sqlproxy" {
