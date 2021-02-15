@@ -7,7 +7,8 @@ as a secret. That could be used in setting up cloudsql proxy pod.
 
 ```hcl
 module "postgresql" {
-  source = "git::ssh://git@gitlab.ack.ee/Infra/terraform-postgresql.git?ref=v2.11.0"
+  source  = "AckeeCZ/postgresql/sql"
+
   project = "${var.project}"
   region = "${var.region}"
   zone = "${var.zone}"
