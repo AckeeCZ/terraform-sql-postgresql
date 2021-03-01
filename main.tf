@@ -108,6 +108,13 @@ resource "google_sql_database_instance" "default" {
       }
     }
 
+    insights_config {
+      query_insights_enabled  = var.enable_query_insights
+      query_string_length     = var.query_string_length_insights
+      record_application_tags = true
+      record_client_address   = true
+    }
+
     ip_configuration {
       private_network = var.private_ip ? data.google_compute_network.default.self_link : null
       ipv4_enabled    = var.enable_local_access || var.public_ip ? true : false

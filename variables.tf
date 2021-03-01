@@ -110,3 +110,15 @@ variable "database_flags" {
   default     = {}
   type        = map(string)
 }
+
+variable "enable_query_insights" {
+  description = "Enable query insights https://cloud.google.com/sql/docs/postgres/insights-overview"
+  default     = true
+  type        = bool
+}
+
+variable "query_string_length_insights" {
+  description = "Insights maximum query length stored in bytes. Between 256 and 4500. Default to 1024."
+  default     = 1024
+  type        = number
+}

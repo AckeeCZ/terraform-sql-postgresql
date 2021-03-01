@@ -81,6 +81,32 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 | random | n/a |
 | vault | n/a |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [google_compute_global_address](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address) |
+| [google_compute_network](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network) |
+| [google_project_iam_member](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_member) |
+| [google_project_service](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) |
+| [google_service_account](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) |
+| [google_service_account_key](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account_key) |
+| [google_service_networking_connection](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_networking_connection) |
+| [google_sql_database](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database) |
+| [google_sql_database_instance](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance) |
+| [google_sql_user](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_user) |
+| [http_http](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) |
+| [kubernetes_endpoints](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/endpoints) |
+| [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) |
+| [kubernetes_service](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service) |
+| [random_id](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) |
+| [random_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) |
+| [vault_generic_secret](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/generic_secret) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -89,11 +115,11 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 | availability\_type | The availability type of the Cloud SQL instance, high availability (REGIONAL) or single zone (ZONAL) | `string` | `"ZONAL"` | no |
 | cluster\_ca\_certificate | Public CA certificate that is the root of trust for the GKE K8s cluster | `string` | n/a | yes |
 | cluster\_endpoint | Cluster control plane endpoint | `string` | n/a | yes |
-| cluster\_pass | Cluster master password, keep always secret! | `string` | n/a | yes |
-| cluster\_user | Cluster master username, keep always secret! | `string` | n/a | yes |
+| cluster\_token | Cluster master token, keep always secret! | `string` | n/a | yes |
 | database\_flags | The optional settings.database\_flags list of values, where key is name and value is value from documentation: https://www.terraform.io/docs/providers/google/r/sql_database_instance.html | `map(string)` | `{}` | no |
 | db\_version | Database version | `string` | `"POSTGRES_11"` | no |
 | enable\_local\_access | Enable access from your local public IP to allow some postprocess PSQL operations | `bool` | `false` | no |
+| enable\_query\_insights | Enable query insights https://cloud.google.com/sql/docs/postgres/insights-overview | `bool` | `true` | no |
 | environment | Project enviroment, e.g. stage, production and development | `string` | `"development"` | no |
 | instance\_tier | The machine type to use | `string` | `"db-custom-1-3840"` | no |
 | namespace | K8s namespace to where insert Cloud SQL credentials secrets | `string` | `"production"` | no |
@@ -115,5 +141,4 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 | postgres\_instance\_ip\_settings | PSQL instance IP address settings |
 | postgres\_instance\_name | PSQL instance name |
 | postgres\_postgres\_password | PSQL password to postgres user |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
