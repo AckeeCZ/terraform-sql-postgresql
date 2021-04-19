@@ -69,76 +69,81 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.13 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| google | n/a |
-| http | n/a |
-| kubernetes | n/a |
-| random | n/a |
-| vault | n/a |
+| <a name="provider_google"></a> [google](#provider\_google) | n/a |
+| <a name="provider_http"></a> [http](#provider\_http) | n/a |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
+| <a name="provider_random"></a> [random](#provider\_random) | n/a |
+| <a name="provider_vault"></a> [vault](#provider\_vault) | n/a |
 
 ## Modules
 
-No Modules.
+No modules.
 
 ## Resources
 
-| Name |
-|------|
-| [google_compute_global_address](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address) |
-| [google_compute_network](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network) |
-| [google_project_iam_member](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_member) |
-| [google_project_service](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) |
-| [google_service_account](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) |
-| [google_service_account_key](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account_key) |
-| [google_service_networking_connection](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_networking_connection) |
-| [google_sql_database](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database) |
-| [google_sql_database_instance](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance) |
-| [google_sql_user](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_user) |
-| [http_http](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) |
-| [kubernetes_endpoints](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/endpoints) |
-| [kubernetes_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) |
-| [kubernetes_service](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service) |
-| [random_id](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) |
-| [random_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) |
-| [vault_generic_secret](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/generic_secret) |
+| Name | Type |
+|------|------|
+| [google_compute_global_address.psql_private_ip_address](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address) | resource |
+| [google_project_iam_member.sqlproxy_role](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_iam_member) | resource |
+| [google_project_service.enable-servicenetworking-api](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_project_service.enable_sqladmin_api](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service) | resource |
+| [google_service_account.sqlproxy](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
+| [google_service_account_key.sqlproxy](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account_key) | resource |
+| [google_service_networking_connection.private_vpc_connection](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_networking_connection) | resource |
+| [google_sql_database.default](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database) | resource |
+| [google_sql_database_instance.default](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance) | resource |
+| [google_sql_database_instance.read_replica](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance) | resource |
+| [google_sql_user.default](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_user) | resource |
+| [google_sql_user.postgres](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_user) | resource |
+| [kubernetes_endpoints.cloudsql](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/endpoints) | resource |
+| [kubernetes_secret.sqlproxy](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
+| [kubernetes_service.cloudsql](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service) | resource |
+| [random_id.instance_name_suffix](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
+| [random_password.postgres_default](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
+| [random_password.postgres_postgres](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
+| [vault_generic_secret.default](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/generic_secret) | resource |
+| [google_compute_network.default](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network) | data source |
+| [http_http.myip](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| authorized\_networks | List of maps of strings authorized networks allowed to connect to Cloud SQL instance, example: [{name: the\_office, cidr: 1.2.3.4/31}] | `list(map(string))` | `[]` | no |
-| availability\_type | The availability type of the Cloud SQL instance, high availability (REGIONAL) or single zone (ZONAL) | `string` | `"ZONAL"` | no |
-| cluster\_ca\_certificate | Public CA certificate that is the root of trust for the GKE K8s cluster | `string` | n/a | yes |
-| cluster\_endpoint | Cluster control plane endpoint | `string` | n/a | yes |
-| cluster\_token | Cluster master token, keep always secret! | `string` | n/a | yes |
-| database\_flags | The optional settings.database\_flags list of values, where key is name and value is value from documentation: https://www.terraform.io/docs/providers/google/r/sql_database_instance.html | `map(string)` | `{}` | no |
-| db\_version | Database version | `string` | `"POSTGRES_11"` | no |
-| enable\_local\_access | Enable access from your local public IP to allow some postprocess PSQL operations | `bool` | `false` | no |
-| enable\_query\_insights | Enable query insights https://cloud.google.com/sql/docs/postgres/insights-overview | `bool` | `true` | no |
-| environment | Project enviroment, e.g. stage, production and development | `string` | `"development"` | no |
-| instance\_tier | The machine type to use | `string` | `"db-custom-1-3840"` | no |
-| namespace | K8s namespace to where insert Cloud SQL credentials secrets | `string` | `"production"` | no |
-| network | GCE VPC used for possible private IP addresses | `string` | `"default"` | no |
-| private\_ip | If set to true, private IP address will get allocated and connect it to VPC network set in `var.network` in the project -- once enabled, this can't be turned off. | `bool` | `false` | no |
-| project | GCP project name | `string` | n/a | yes |
-| public\_ip | If set to true, public IP address will get allocated | `bool` | `false` | no |
-| read\_replicas | Map of maps containing name as a key of read\_replicas mapa and settings some parameters of read replica. For more information see README part Read replica | `map` | `{}` | no |
-| region | GCP region | `string` | `"europe-west3"` | no |
-| sqlproxy\_dependencies | If set to true, we will create dependencies for running SQLproxy - GCP IAM SA, Kubernetes secret and Kubernetes Service | `bool` | `true` | no |
-| vault\_secret\_path | Path to secret in local vault, used mainly to save gke credentials | `string` | n/a | yes |
-| zone | The preferred compute engine zone | `string` | `"europe-west3-c"` | no |
+| <a name="input_authorized_networks"></a> [authorized\_networks](#input\_authorized\_networks) | List of maps of strings authorized networks allowed to connect to Cloud SQL instance, example: [{name: the\_office, cidr: 1.2.3.4/31}] | `list(map(string))` | `[]` | no |
+| <a name="input_availability_type"></a> [availability\_type](#input\_availability\_type) | The availability type of the Cloud SQL instance, high availability (REGIONAL) or single zone (ZONAL) | `string` | `"ZONAL"` | no |
+| <a name="input_cluster_ca_certificate"></a> [cluster\_ca\_certificate](#input\_cluster\_ca\_certificate) | Public CA certificate that is the root of trust for the GKE K8s cluster | `string` | n/a | yes |
+| <a name="input_cluster_endpoint"></a> [cluster\_endpoint](#input\_cluster\_endpoint) | Cluster control plane endpoint | `string` | n/a | yes |
+| <a name="input_cluster_token"></a> [cluster\_token](#input\_cluster\_token) | Cluster master token, keep always secret! | `string` | n/a | yes |
+| <a name="input_database_flags"></a> [database\_flags](#input\_database\_flags) | The optional settings.database\_flags list of values, where key is name and value is value from documentation: https://www.terraform.io/docs/providers/google/r/sql_database_instance.html | `map(string)` | `{}` | no |
+| <a name="input_db_version"></a> [db\_version](#input\_db\_version) | Database version | `string` | `"POSTGRES_11"` | no |
+| <a name="input_enable_local_access"></a> [enable\_local\_access](#input\_enable\_local\_access) | Enable access from your local public IP to allow some postprocess PSQL operations | `bool` | `false` | no |
+| <a name="input_enable_query_insights"></a> [enable\_query\_insights](#input\_enable\_query\_insights) | Enable query insights https://cloud.google.com/sql/docs/postgres/insights-overview | `bool` | `true` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | Project enviroment, e.g. stage, production and development | `string` | `"development"` | no |
+| <a name="input_instance_tier"></a> [instance\_tier](#input\_instance\_tier) | The machine type to use | `string` | `"db-custom-1-3840"` | no |
+| <a name="input_namespace"></a> [namespace](#input\_namespace) | K8s namespace to where insert Cloud SQL credentials secrets | `string` | `"production"` | no |
+| <a name="input_network"></a> [network](#input\_network) | GCE VPC used for possible private IP addresses | `string` | `"default"` | no |
+| <a name="input_private_ip"></a> [private\_ip](#input\_private\_ip) | If set to true, private IP address will get allocated and connect it to VPC network set in `var.network` in the project -- once enabled, this can't be turned off. | `bool` | `false` | no |
+| <a name="input_project"></a> [project](#input\_project) | GCP project name | `string` | n/a | yes |
+| <a name="input_public_ip"></a> [public\_ip](#input\_public\_ip) | If set to true, public IP address will get allocated | `bool` | `false` | no |
+| <a name="input_query_string_length_insights"></a> [query\_string\_length\_insights](#input\_query\_string\_length\_insights) | Insights maximum query length stored in bytes. Between 256 and 4500. Default to 1024. | `number` | `1024` | no |
+| <a name="input_read_replicas"></a> [read\_replicas](#input\_read\_replicas) | Map of maps containing name as a key of read\_replicas mapa and settings some parameters of read replica. For more information see README part Read replica | `map` | `{}` | no |
+| <a name="input_region"></a> [region](#input\_region) | GCP region | `string` | `"europe-west3"` | no |
+| <a name="input_sqlproxy_dependencies"></a> [sqlproxy\_dependencies](#input\_sqlproxy\_dependencies) | If set to true, we will create dependencies for running SQLproxy - GCP IAM SA, Kubernetes secret and Kubernetes Service | `bool` | `true` | no |
+| <a name="input_vault_secret_path"></a> [vault\_secret\_path](#input\_vault\_secret\_path) | Path to secret in local vault, used mainly to save gke credentials | `string` | n/a | yes |
+| <a name="input_zone"></a> [zone](#input\_zone) | The preferred compute engine zone | `string` | `"europe-west3-c"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| postgres\_default\_password | PSQL password to default user |
-| postgres\_instance\_ip\_settings | PSQL instance IP address settings |
-| postgres\_instance\_name | PSQL instance name |
-| postgres\_postgres\_password | PSQL password to postgres user |
+| <a name="output_postgres_default_password"></a> [postgres\_default\_password](#output\_postgres\_default\_password) | PSQL password to default user |
+| <a name="output_postgres_instance_ip_settings"></a> [postgres\_instance\_ip\_settings](#output\_postgres\_instance\_ip\_settings) | PSQL instance IP address settings |
+| <a name="output_postgres_instance_name"></a> [postgres\_instance\_name](#output\_postgres\_instance\_name) | PSQL instance name |
+| <a name="output_postgres_postgres_password"></a> [postgres\_postgres\_password](#output\_postgres\_postgres\_password) | PSQL password to postgres user |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
