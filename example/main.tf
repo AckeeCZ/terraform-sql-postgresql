@@ -15,7 +15,7 @@ provider "vault" {
 }
 
 provider "kubernetes" {
-  version = "~> 1.13.2"
+  version = "~> 2.0.0"
 }
 
 provider "helm" {
@@ -67,7 +67,7 @@ module "postgresql" {
 }
 
 module "gke" {
-  source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v9.3.0"
+  source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v9.4.0"
   cluster_name      = "postgresql-cluster-test"
   namespace         = var.namespace
   project           = var.project
