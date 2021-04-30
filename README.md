@@ -128,6 +128,7 @@ No modules.
 | <a name="input_instance_tier"></a> [instance\_tier](#input\_instance\_tier) | The machine type to use | `string` | `"db-custom-1-3840"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | K8s namespace to where insert Cloud SQL credentials secrets | `string` | `"production"` | no |
 | <a name="input_network"></a> [network](#input\_network) | GCE VPC used for possible private IP addresses | `string` | `"default"` | no |
+| <a name="input_point_in_time_recovery"></a> [point\_in\_time\_recovery](#input\_point\_in\_time\_recovery) | Enable Point-in-time recovery (effectively turns on WAL) | `bool` | `false` | no |
 | <a name="input_private_ip"></a> [private\_ip](#input\_private\_ip) | If set to true, private IP address will get allocated and connect it to VPC network set in `var.network` in the project -- once enabled, this can't be turned off. | `bool` | `false` | no |
 | <a name="input_project"></a> [project](#input\_project) | GCP project name | `string` | n/a | yes |
 | <a name="input_public_ip"></a> [public\_ip](#input\_public\_ip) | If set to true, public IP address will get allocated | `bool` | `false` | no |
@@ -135,6 +136,7 @@ No modules.
 | <a name="input_read_replicas"></a> [read\_replicas](#input\_read\_replicas) | Map of maps containing name as a key of read\_replicas mapa and settings some parameters of read replica. For more information see README part Read replica | `map` | `{}` | no |
 | <a name="input_region"></a> [region](#input\_region) | GCP region | `string` | `"europe-west3"` | no |
 | <a name="input_sqlproxy_dependencies"></a> [sqlproxy\_dependencies](#input\_sqlproxy\_dependencies) | If set to true, we will create dependencies for running SQLproxy - GCP IAM SA, Kubernetes secret and Kubernetes Service | `bool` | `true` | no |
+| <a name="input_user_suffix"></a> [user\_suffix](#input\_user\_suffix) | Suffix - used, for instance, when you create a clone. Should include starting dash | `string` | `""` | no |
 | <a name="input_vault_secret_path"></a> [vault\_secret\_path](#input\_vault\_secret\_path) | Path to secret in local vault, used mainly to save gke credentials | `string` | n/a | yes |
 | <a name="input_zone"></a> [zone](#input\_zone) | The preferred compute engine zone | `string` | `"europe-west3-c"` | no |
 
