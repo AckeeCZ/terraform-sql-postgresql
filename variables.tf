@@ -122,3 +122,15 @@ variable "query_string_length_insights" {
   default     = 1024
   type        = number
 }
+
+variable "point_in_time_recovery" {
+  description = "Enable Point-in-time recovery (effectively turns on WAL)"
+  default     = false
+  type        = bool
+}
+
+variable "user_suffix" {
+  description = "Suffix - used, for instance, when you create a clone. Should include starting dash"
+  default     = ""
+  type        = string
+}

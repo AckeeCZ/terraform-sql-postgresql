@@ -26,7 +26,6 @@ provider "http" {
   version = "~> 2.0"
 }
 
-
 module "postgresql" {
   source                 = "../"
   project                = var.project
@@ -43,6 +42,7 @@ module "postgresql" {
   private_ip             = true
   public_ip              = true
   sqlproxy_dependencies  = false
+  point_in_time_recovery = true
   authorized_networks = [
     {
       name : "office"

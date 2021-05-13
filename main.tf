@@ -1,9 +1,3 @@
-locals {
-  database_flags = merge({
-    log_min_duration_statement : "300"
-  }, var.database_flags)
-}
-
 data "google_compute_network" "default" {
   name = var.network
 }
@@ -20,11 +14,14 @@ data "http" "myip" {
 }
 
 locals {
-  instance_name                 = "${var.project}-${var.environment}-${random_id.instance_name_suffix.hex}"
+  instance_name                 = "${var.project}-${var.environment}-${random_id.instance_name_suffix.hex}${var.user_suffix}"
   sqlproxy_service_account_name = substr("sqlproxy-postgres-${var.environment}", 0, 30)
   project_name_normalized       = replace(var.project, "-", "_")
   postgres_database_name        = local.project_name_normalized
   postgres_database_user        = local.postgres_database_name
+  database_flags = merge({
+    log_min_duration_statement : "300"
+  }, var.database_flags)
 }
 
 resource "google_project_service" "enable_sqladmin_api" {
@@ -87,8 +84,10 @@ resource "google_sql_database_instance" "default" {
     availability_type = var.availability_type
 
     backup_configuration {
-      enabled    = true
-      start_time = "03:00"
+      enabled                        = true
+      start_time                     = "03:00"
+      point_in_time_recovery_enabled = var.point_in_time_recovery
+      location                       = "eu"
     }
 
     location_preference {
