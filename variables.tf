@@ -134,3 +134,51 @@ variable "user_suffix" {
   default     = ""
   type        = string
 }
+
+variable "random_id_length" {
+  description = "Byte length of random ID, used as suffix in SQL name"
+  default     = 4
+  type        = number
+}
+
+variable "backup_start_time" {
+  description = "The time, when backup starts"
+  default     = "03:00"
+  type        = string
+}
+
+variable "backup_location" {
+  description = "Location of backups"
+  default     = "eu"
+  type        = string
+}
+
+variable "maintenance_window_day" {
+  description = "The day, when maintenance window will be performed"
+  default     = "7"
+  type        = string
+}
+
+variable "maintenance_window_hour" {
+  description = "The hour, when maintenance window begins"
+  default     = "4"
+  type        = string
+}
+
+variable "password_length" {
+  description = "Password length of postgres users"
+  default     = 16
+  type        = number
+}
+
+variable "log_min_duration_statement" {
+  description = "Causes the duration of each completed statement to be logged if the statement ran for at least the specified number of milliseconds."
+  default     = "300"
+  type        = string
+}
+
+variable "cloudsql_port" {
+  description = "CloudSQL's port"
+  default     = 5432
+  type        = number
+}
