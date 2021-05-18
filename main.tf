@@ -3,7 +3,7 @@ data "google_compute_network" "default" {
 }
 
 resource "random_id" "instance_name_suffix" {
-  byte_length = 4
+  byte_length = var.random_id_length
 }
 
 data "http" "myip" {
@@ -20,7 +20,7 @@ locals {
   postgres_database_name        = local.project_name_normalized
   postgres_database_user        = local.postgres_database_name
   database_flags = merge({
-    log_min_duration_statement : "300"
+    log_min_duration_statement : var.log_min_duration_statement
   }, var.database_flags)
 }
 
@@ -85,9 +85,9 @@ resource "google_sql_database_instance" "default" {
 
     backup_configuration {
       enabled                        = true
-      start_time                     = "03:00"
+      start_time                     = var.backup_start_time
       point_in_time_recovery_enabled = var.point_in_time_recovery
-      location                       = "eu"
+      location                       = var.backup_location
     }
 
     location_preference {
@@ -95,8 +95,8 @@ resource "google_sql_database_instance" "default" {
     }
 
     maintenance_window {
-      day  = "7"
-      hour = "4"
+      day  = var.maintenance_window_day
+      hour = var.maintenance_window_hour
     }
 
     dynamic "database_flags" {
@@ -150,7 +150,7 @@ resource "google_sql_database_instance" "read_replica" {
 
   settings {
     tier              = lookup(each.value, "instance_tier", "db-custom-1-3840")
-    availability_type = "ZONAL"
+    availability_type = var.availability_type
 
     backup_configuration {
       enabled = false
@@ -186,13 +186,13 @@ resource "google_sql_database_instance" "read_replica" {
 }
 
 resource "random_password" "postgres_postgres" {
-  length           = 16
+  length           = var.password_length
   special          = true
   override_special = "/@_%"
 }
 
 resource "random_password" "postgres_default" {
-  length           = 16
+  length           = var.password_length
   special          = true
   override_special = "/@_%"
 }
