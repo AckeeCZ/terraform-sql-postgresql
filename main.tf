@@ -150,7 +150,7 @@ resource "google_sql_database_instance" "read_replica" {
 
   settings {
     tier              = lookup(each.value, "instance_tier", "db-custom-1-3840")
-    availability_type = var.availability_type
+    availability_type = "ZONAL"
 
     backup_configuration {
       enabled = false
