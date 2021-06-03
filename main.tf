@@ -164,6 +164,16 @@ resource "google_sql_database_instance" "read_replica" {
       }
     }
 
+    dynamic "insights_config" {
+      for_each = var.enable_query_insights ? [1] : []
+      content {
+        query_insights_enabled  = var.enable_query_insights
+        query_string_length     = var.query_string_length_insights
+        record_application_tags = true
+        record_client_address   = true
+      }
+    }
+
     ip_configuration {
 
       ipv4_enabled    = lookup(each.value, "ipv4_enabled", false)
