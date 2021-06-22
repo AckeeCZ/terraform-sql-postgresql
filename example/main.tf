@@ -3,7 +3,7 @@ provider "random" {
 }
 
 provider "google" {
-  version = "~> 3.69.0"
+  version = "~> 3.73.0"
 }
 
 provider "google-beta" {
