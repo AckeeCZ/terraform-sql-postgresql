@@ -14,13 +14,13 @@ provider "vault" {
   version = "~> 2.21.0"
 }
 
-provider "kubernetes" {
-  version = "~> 2.3.0"
-}
+//provider "kubernetes" {
+//  version = "~> 2.3.0"
+//}
 
-provider "helm" {
-  version = "~> 2.0"
-}
+//provider "helm" {
+//  version = "~> 2.0"
+//}
 
 provider "http" {
   version = "~> 2.0"
@@ -31,15 +31,15 @@ module "postgresql" {
   project                = var.project
   region                 = var.region
   zone                   = var.zone
-  namespace              = var.namespace
-  cluster_ca_certificate = module.gke.cluster_ca_certificate
-  cluster_token          = module.gke.access_token
-  cluster_endpoint       = module.gke.endpoint
+//  namespace              = var.namespace
+//  cluster_ca_certificate = module.gke.cluster_ca_certificate
+//  cluster_token          = module.gke.access_token
+//  cluster_endpoint       = module.gke.endpoint
   environment            = "production"
   availability_type      = "REGIONAL" # REGIONAL for HA setup, ZONAL for single zone
   vault_secret_path      = "secret/devops/production/${var.project}/${var.environment}"
   enable_local_access    = true
-  private_ip             = true
+  private_ip             = false
   public_ip              = true
   sqlproxy_dependencies  = false
   point_in_time_recovery = true
@@ -47,17 +47,21 @@ module "postgresql" {
     {
       name : "office"
       cidr : "1.2.3.4/31"
+    },
+    {
+      name : "Onza"
+      cidr : "91.237.237.4"
     }
   ]
   read_replicas = {
     replica-a : {
       instance_tier = "db-custom-1-3840"
-      ipv4_enabled  = false
+      ipv4_enabled  = true
       zone          = "europe-west3-a"
     },
     replica-b : {
       instance_tier = "db-custom-1-3840"
-      ipv4_enabled  = false
+      ipv4_enabled  = true
       zone          = "europe-west3-b"
     },
   }
@@ -66,17 +70,24 @@ module "postgresql" {
   }
 }
 
-module "gke" {
-  source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v9.5.0"
-  cluster_name      = "postgresql-cluster-test"
-  namespace         = var.namespace
-  project           = var.project
-  location          = var.zone
-  vault_secret_path = var.vault_secret_path
-  private           = false
-  min_nodes         = 1
-  max_nodes         = 2
+
+module "cloudrun" {
+  source  = "git::ssh://git@gitlab.ack.ee/Infra/tf-module/terraform-cloudrun.git?ref=v1.1.0"
+  project = var.project
+  region  = var.region
 }
+
+//module "gke" {
+//  source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v9.5.0"
+//  cluster_name      = "postgresql-cluster-test"
+//  namespace         = var.namespace
+//  project           = var.project
+//  location          = var.zone
+//  vault_secret_path = var.vault_secret_path
+//  private           = false
+//  min_nodes         = 1
+//  max_nodes         = 2
+//}
 
 output "psql_ip" {
   value = module.postgresql.postgres_instance_ip_settings.0.ip_address
@@ -86,9 +97,9 @@ variable "environment" {
   default = "development"
 }
 
-variable "namespace" {
-  default = "stage"
-}
+//variable "namespace" {
+//  default = "stage"
+//}
 
 variable "project" {
 }
