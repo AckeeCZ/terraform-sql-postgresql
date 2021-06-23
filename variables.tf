@@ -29,16 +29,19 @@ variable "namespace" {
 
 variable "cluster_ca_certificate" {
   description = "Public CA certificate that is the root of trust for the GKE K8s cluster"
+  default     = null
   type        = string
 }
 
 variable "cluster_token" {
   description = "Cluster master token, keep always secret!"
+  default     = null
   type        = string
 }
 
 variable "cluster_endpoint" {
   description = "Cluster control plane endpoint"
+  default     = "example.com:8080"
   type        = string
 }
 
@@ -223,4 +226,10 @@ variable "disk_autoresize_limit" {
   description = "Limit of disk space for autoresize"
   type        = number
   default     = 0
+}
+
+variable "provision_kubernetes_resources" {
+  description = "Should we provision anything that needs Kubernetes?"
+  type        = bool
+  default     = true
 }
