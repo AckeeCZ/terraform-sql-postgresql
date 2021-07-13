@@ -7,7 +7,7 @@ provider "google" {
 }
 
 provider "google-beta" {
-  version = "~> 3.73.0"
+  version = "~> 3.75.0"
 }
 
 provider "vault" {
