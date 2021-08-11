@@ -117,6 +117,9 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_authorized_networks"></a> [authorized\_networks](#input\_authorized\_networks) | List of maps of strings authorized networks allowed to connect to Cloud SQL instance, example: [{name: the\_office, cidr: 1.2.3.4/31}] | `list(map(string))` | `[]` | no |
 | <a name="input_availability_type"></a> [availability\_type](#input\_availability\_type) | The availability type of the Cloud SQL instance, high availability (REGIONAL) or single zone (ZONAL) | `string` | `"ZONAL"` | no |
+| <a name="input_backup_location"></a> [backup\_location](#input\_backup\_location) | Location of backups | `string` | `"eu"` | no |
+| <a name="input_backup_start_time"></a> [backup\_start\_time](#input\_backup\_start\_time) | The time, when backup starts | `string` | `"03:00"` | no |
+| <a name="input_cloudsql_port"></a> [cloudsql\_port](#input\_cloudsql\_port) | CloudSQL's port | `number` | `5432` | no |
 | <a name="input_cluster_ca_certificate"></a> [cluster\_ca\_certificate](#input\_cluster\_ca\_certificate) | Public CA certificate that is the root of trust for the GKE K8s cluster | `string` | n/a | yes |
 | <a name="input_cluster_endpoint"></a> [cluster\_endpoint](#input\_cluster\_endpoint) | Cluster control plane endpoint | `string` | n/a | yes |
 | <a name="input_cluster_token"></a> [cluster\_token](#input\_cluster\_token) | Cluster master token, keep always secret! | `string` | n/a | yes |
@@ -126,13 +129,18 @@ No modules.
 | <a name="input_enable_query_insights"></a> [enable\_query\_insights](#input\_enable\_query\_insights) | Enable query insights https://cloud.google.com/sql/docs/postgres/insights-overview | `bool` | `true` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Project enviroment, e.g. stage, production and development | `string` | `"development"` | no |
 | <a name="input_instance_tier"></a> [instance\_tier](#input\_instance\_tier) | The machine type to use | `string` | `"db-custom-1-3840"` | no |
+| <a name="input_log_min_duration_statement"></a> [log\_min\_duration\_statement](#input\_log\_min\_duration\_statement) | Causes the duration of each completed statement to be logged if the statement ran for at least the specified number of milliseconds. | `string` | `"300"` | no |
+| <a name="input_maintenance_window_day"></a> [maintenance\_window\_day](#input\_maintenance\_window\_day) | The day, when maintenance window will be performed | `string` | `"7"` | no |
+| <a name="input_maintenance_window_hour"></a> [maintenance\_window\_hour](#input\_maintenance\_window\_hour) | The hour, when maintenance window begins | `string` | `"4"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | K8s namespace to where insert Cloud SQL credentials secrets | `string` | `"production"` | no |
 | <a name="input_network"></a> [network](#input\_network) | GCE VPC used for possible private IP addresses | `string` | `"default"` | no |
+| <a name="input_password_length"></a> [password\_length](#input\_password\_length) | Password length of postgres users | `number` | `16` | no |
 | <a name="input_point_in_time_recovery"></a> [point\_in\_time\_recovery](#input\_point\_in\_time\_recovery) | Enable Point-in-time recovery (effectively turns on WAL) | `bool` | `false` | no |
 | <a name="input_private_ip"></a> [private\_ip](#input\_private\_ip) | If set to true, private IP address will get allocated and connect it to VPC network set in `var.network` in the project -- once enabled, this can't be turned off. | `bool` | `false` | no |
 | <a name="input_project"></a> [project](#input\_project) | GCP project name | `string` | n/a | yes |
 | <a name="input_public_ip"></a> [public\_ip](#input\_public\_ip) | If set to true, public IP address will get allocated | `bool` | `false` | no |
 | <a name="input_query_string_length_insights"></a> [query\_string\_length\_insights](#input\_query\_string\_length\_insights) | Insights maximum query length stored in bytes. Between 256 and 4500. Default to 1024. | `number` | `1024` | no |
+| <a name="input_random_id_length"></a> [random\_id\_length](#input\_random\_id\_length) | Byte length of random ID, used as suffix in SQL name | `number` | `4` | no |
 | <a name="input_read_replicas"></a> [read\_replicas](#input\_read\_replicas) | Map of maps containing name as a key of read\_replicas mapa and settings some parameters of read replica. For more information see README part Read replica | `map` | `{}` | no |
 | <a name="input_region"></a> [region](#input\_region) | GCP region | `string` | `"europe-west3"` | no |
 | <a name="input_sqlproxy_dependencies"></a> [sqlproxy\_dependencies](#input\_sqlproxy\_dependencies) | If set to true, we will create dependencies for running SQLproxy - GCP IAM SA, Kubernetes secret and Kubernetes Service | `bool` | `true` | no |
@@ -145,6 +153,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_postgres_default_password"></a> [postgres\_default\_password](#output\_postgres\_default\_password) | PSQL password to default user |
+| <a name="output_postgres_instance_connection_name"></a> [postgres\_instance\_connection\_name](#output\_postgres\_instance\_connection\_name) | PSQL instance connection name |
 | <a name="output_postgres_instance_ip_settings"></a> [postgres\_instance\_ip\_settings](#output\_postgres\_instance\_ip\_settings) | PSQL instance IP address settings |
 | <a name="output_postgres_instance_name"></a> [postgres\_instance\_name](#output\_postgres\_instance\_name) | PSQL instance name |
 | <a name="output_postgres_postgres_password"></a> [postgres\_postgres\_password](#output\_postgres\_postgres\_password) | PSQL password to postgres user |
