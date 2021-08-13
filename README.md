@@ -76,7 +76,6 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 | Name | Version |
 |------|---------|
 | <a name="provider_google"></a> [google](#provider\_google) | n/a |
-| <a name="provider_http"></a> [http](#provider\_http) | n/a |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
 | <a name="provider_vault"></a> [vault](#provider\_vault) | n/a |
@@ -109,7 +108,6 @@ No modules.
 | [random_password.postgres_postgres](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [vault_generic_secret.default](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/generic_secret) | resource |
 | [google_compute_network.default](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network) | data source |
-| [http_http.myip](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 
 ## Inputs
 
@@ -125,7 +123,6 @@ No modules.
 | <a name="input_cluster_token"></a> [cluster\_token](#input\_cluster\_token) | Cluster master token, keep always secret! | `string` | n/a | yes |
 | <a name="input_database_flags"></a> [database\_flags](#input\_database\_flags) | The optional settings.database\_flags list of values, where key is name and value is value from documentation: https://www.terraform.io/docs/providers/google/r/sql_database_instance.html | `map(string)` | `{}` | no |
 | <a name="input_db_version"></a> [db\_version](#input\_db\_version) | Database version | `string` | `"POSTGRES_11"` | no |
-| <a name="input_enable_local_access"></a> [enable\_local\_access](#input\_enable\_local\_access) | Enable access from your local public IP to allow some postprocess PSQL operations | `bool` | `false` | no |
 | <a name="input_enable_query_insights"></a> [enable\_query\_insights](#input\_enable\_query\_insights) | Enable query insights https://cloud.google.com/sql/docs/postgres/insights-overview | `bool` | `true` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Project enviroment, e.g. stage, production and development | `string` | `"development"` | no |
 | <a name="input_instance_tier"></a> [instance\_tier](#input\_instance\_tier) | The machine type to use | `string` | `"db-custom-1-3840"` | no |

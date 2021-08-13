@@ -82,12 +82,6 @@ variable "network" {
   type        = string
 }
 
-variable "enable_local_access" {
-  description = "Enable access from your local public IP to allow some postprocess PSQL operations"
-  default     = false
-  type        = bool
-}
-
 variable "authorized_networks" {
   description = "List of maps of strings authorized networks allowed to connect to Cloud SQL instance, example: [{name: the_office, cidr: 1.2.3.4/31}]"
   default     = []

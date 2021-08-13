@@ -38,7 +38,6 @@ module "postgresql" {
   environment            = "production"
   availability_type      = "REGIONAL" # REGIONAL for HA setup, ZONAL for single zone
   vault_secret_path      = "secret/devops/production/${var.project}/${var.environment}"
-  enable_local_access    = true
   private_ip             = true
   public_ip              = true
   sqlproxy_dependencies  = false
