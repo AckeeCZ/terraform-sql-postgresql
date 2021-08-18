@@ -1,29 +1,27 @@
-provider "random" {
-  version = "~> 3.1.0"
-}
+provider "random" {}
 
-provider "google" {
-  version = "~> 3.73.0"
-}
+provider "google" {}
 
-provider "google-beta" {
-  version = "~> 3.73.0"
-}
+provider "google-beta" {}
 
-provider "vault" {
-  version = "~> 2.21.0"
-}
+provider "vault" {}
 
-provider "kubernetes" {
-  version = "~> 2.3.0"
-}
+provider "kubernetes" {}
 
-provider "helm" {
-  version = "~> 2.0"
-}
+provider "helm" {}
 
-provider "http" {
-  version = "~> 2.0"
+provider "http" {}
+
+
+provider "postgresql" {
+  scheme          = "gcppostgres"
+  host            = module.postgresql.postgres_instance_connection_name
+  port            = 5432
+  database        = replace(var.project, "-", "_")
+  username        = replace(var.project, "-", "_")
+  password        = module.postgresql.postgres_default_password
+  sslmode         = "require"
+  connect_timeout = 15
 }
 
 module "postgresql" {
