@@ -40,6 +40,7 @@ module "postgresql" {
   public_ip              = true
   sqlproxy_dependencies  = false
   point_in_time_recovery = true
+  deletion_protection    = false
   authorized_networks = [
     {
       name : "office"

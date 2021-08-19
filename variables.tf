@@ -36,6 +36,12 @@ variable "cluster_endpoint" {
   type        = string
 }
 
+variable "deletion_protection" {
+  description = "Whether or not to allow Terraform to destroy the instance. Unless this field is set to false in Terraform state, a terraform destroy or terraform apply command that deletes the instance will fail."
+  default     = true
+  type        = bool
+}
+
 variable "environment" {
   description = "Project enviroment, e.g. stage, production and development"
   default     = "development"

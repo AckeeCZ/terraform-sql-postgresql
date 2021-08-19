@@ -68,9 +68,10 @@ resource "google_service_networking_connection" "private_vpc_connection" {
 }
 
 resource "google_sql_database_instance" "default" {
-  name             = local.instance_name
-  database_version = var.db_version
-  region           = var.region
+  name                = local.instance_name
+  database_version    = var.db_version
+  region              = var.region
+  deletion_protection = var.deletion_protection
 
   settings {
     tier              = var.instance_tier
@@ -129,6 +130,7 @@ resource "google_sql_database_instance" "read_replica" {
   master_instance_name = google_sql_database_instance.default.name
   region               = var.region
   database_version     = var.db_version
+  deletion_protection  = var.deletion_protection
 
   replica_configuration {
     failover_target = false
