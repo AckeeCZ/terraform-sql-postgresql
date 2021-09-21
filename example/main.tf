@@ -1,18 +1,3 @@
-provider "random" {}
-
-provider "google" {}
-
-provider "google-beta" {}
-
-provider "vault" {}
-
-provider "kubernetes" {}
-
-provider "helm" {}
-
-provider "http" {}
-
-
 provider "postgresql" {
   scheme          = "gcppostgres"
   host            = module.postgresql.postgres_instance_connection_name
@@ -65,7 +50,7 @@ module "postgresql" {
 }
 
 module "gke" {
-  source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v9.5.0"
+  source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v9.6.1"
   cluster_name      = "postgresql-cluster-test"
   namespace         = var.namespace
   project           = var.project

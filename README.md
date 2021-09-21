@@ -69,7 +69,7 @@ GKE module: https://gitlab.ack.ee/Infra/terraform-gke-vpc
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.15 |
 
 ## Providers
 
