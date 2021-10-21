@@ -5,5 +5,5 @@ variables:
   MODULE_PIPELINE: "true"
 include:
   - project: Ackee/gitlab-ci-templates
-    ref: terraform/v1.8.0
+    ref: terraform/v1.9.0
     file: terraform/pipeline.yml
