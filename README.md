@@ -142,6 +142,7 @@ No modules.
 | <a name="input_read_replicas"></a> [read\_replicas](#input\_read\_replicas) | Map of maps containing name as a key of read\_replicas mapa and settings some parameters of read replica. For more information see README part Read replica | `map` | `{}` | no |
 | <a name="input_region"></a> [region](#input\_region) | GCP region | `string` | `"europe-west3"` | no |
 | <a name="input_sqlproxy_dependencies"></a> [sqlproxy\_dependencies](#input\_sqlproxy\_dependencies) | If set to true, we will create dependencies for running SQLproxy - GCP IAM SA, Kubernetes secret and Kubernetes Service | `bool` | `true` | no |
+| <a name="input_user_labels"></a> [user\_labels](#input\_user\_labels) | Labels to the instance | `map(string)` | `{}` | no |
 | <a name="input_user_suffix"></a> [user\_suffix](#input\_user\_suffix) | Suffix - used, for instance, when you create a clone. Should include starting dash | `string` | `""` | no |
 | <a name="input_vault_secret_path"></a> [vault\_secret\_path](#input\_vault\_secret\_path) | Path to secret in local vault, used mainly to save gke credentials | `string` | n/a | yes |
 | <a name="input_zone"></a> [zone](#input\_zone) | The preferred compute engine zone | `string` | `"europe-west3-c"` | no |
