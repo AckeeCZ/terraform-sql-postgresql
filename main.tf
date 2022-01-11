@@ -120,6 +120,7 @@ resource "google_sql_database_instance" "default" {
         }
       }
     }
+    user_labels = var.user_labels
   }
   depends_on = [google_project_service.enable_sqladmin_api]
 }

@@ -182,3 +182,9 @@ variable "cloudsql_port" {
   default     = 5432
   type        = number
 }
+
+variable "user_labels" {
+  description = "Labels to the instance"
+  type        = map(string)
+  default     = {}
+}
