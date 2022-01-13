@@ -188,3 +188,9 @@ variable "user_labels" {
   type        = map(string)
   default     = {}
 }
+
+variable "transaction_log_retention_days" {
+  description = "The number of days of transaction logs we retain for point in time restore, from 1-7."
+  type        = number
+  default     = null
+}
