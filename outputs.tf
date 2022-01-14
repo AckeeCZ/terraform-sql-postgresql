@@ -22,3 +22,8 @@ output "postgres_instance_ip_settings" {
   description = "PSQL instance IP address settings"
   value       = google_sql_database_instance.default.ip_address
 }
+
+output "postgres_reader_instance_ip_settings" {
+  description = "PSQL instance IP address settings of read replicas"
+  value       = { for k, _ in var.read_replicas : k => google_sql_database_instance.read_replica[k].ip_address }
+}

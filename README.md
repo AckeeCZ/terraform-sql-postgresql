@@ -157,4 +157,5 @@ No modules.
 | <a name="output_postgres_instance_ip_settings"></a> [postgres\_instance\_ip\_settings](#output\_postgres\_instance\_ip\_settings) | PSQL instance IP address settings |
 | <a name="output_postgres_instance_name"></a> [postgres\_instance\_name](#output\_postgres\_instance\_name) | PSQL instance name |
 | <a name="output_postgres_postgres_password"></a> [postgres\_postgres\_password](#output\_postgres\_postgres\_password) | PSQL password to postgres user |
+| <a name="output_postgres_reader_instance_ip_settings"></a> [postgres\_reader\_instance\_ip\_settings](#output\_postgres\_reader\_instance\_ip\_settings) | PSQL instance IP address settings of read replicas |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
