@@ -2,7 +2,7 @@ resource "kubernetes_endpoints" "cloudsql" {
   count = var.private_ip ? 1 : 0
 
   metadata {
-    name      = "cloudsql"
+    name      = var.kubernetes_service_name
     namespace = var.namespace
   }
 
@@ -21,7 +21,7 @@ resource "kubernetes_service" "cloudsql" {
   count = var.private_ip ? 1 : 0
 
   metadata {
-    name      = "cloudsql"
+    name      = var.kubernetes_service_name
     namespace = var.namespace
   }
 

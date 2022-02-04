@@ -127,6 +127,7 @@ No modules.
 | <a name="input_enable_query_insights"></a> [enable\_query\_insights](#input\_enable\_query\_insights) | Enable query insights https://cloud.google.com/sql/docs/postgres/insights-overview | `bool` | `true` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Project enviroment, e.g. stage, production and development | `string` | `"development"` | no |
 | <a name="input_instance_tier"></a> [instance\_tier](#input\_instance\_tier) | The machine type to use | `string` | `"db-custom-1-3840"` | no |
+| <a name="input_kubernetes_service_name"></a> [kubernetes\_service\_name](#input\_kubernetes\_service\_name) | Name of kubernetes service | `string` | `"cloudsql"` | no |
 | <a name="input_log_min_duration_statement"></a> [log\_min\_duration\_statement](#input\_log\_min\_duration\_statement) | Causes the duration of each completed statement to be logged if the statement ran for at least the specified number of milliseconds. | `string` | `"300"` | no |
 | <a name="input_maintenance_window_day"></a> [maintenance\_window\_day](#input\_maintenance\_window\_day) | The day, when maintenance window will be performed | `string` | `"7"` | no |
 | <a name="input_maintenance_window_hour"></a> [maintenance\_window\_hour](#input\_maintenance\_window\_hour) | The hour, when maintenance window begins | `string` | `"4"` | no |
@@ -142,6 +143,7 @@ No modules.
 | <a name="input_read_replicas"></a> [read\_replicas](#input\_read\_replicas) | Map of maps containing name as a key of read\_replicas mapa and settings some parameters of read replica. For more information see README part Read replica | `map` | `{}` | no |
 | <a name="input_region"></a> [region](#input\_region) | GCP region | `string` | `"europe-west3"` | no |
 | <a name="input_sqlproxy_dependencies"></a> [sqlproxy\_dependencies](#input\_sqlproxy\_dependencies) | If set to true, we will create dependencies for running SQLproxy - GCP IAM SA, Kubernetes secret and Kubernetes Service | `bool` | `true` | no |
+| <a name="input_sqlproxy_service_account_name"></a> [sqlproxy\_service\_account\_name](#input\_sqlproxy\_service\_account\_name) | SQL instance service account name | `string` | `null` | no |
 | <a name="input_transaction_log_retention_days"></a> [transaction\_log\_retention\_days](#input\_transaction\_log\_retention\_days) | The number of days of transaction logs we retain for point in time restore, from 1-7. | `number` | `null` | no |
 | <a name="input_user_labels"></a> [user\_labels](#input\_user\_labels) | Labels to the instance | `map(string)` | `{}` | no |
 | <a name="input_user_suffix"></a> [user\_suffix](#input\_user\_suffix) | Suffix - used, for instance, when you create a clone. Should include starting dash | `string` | `""` | no |

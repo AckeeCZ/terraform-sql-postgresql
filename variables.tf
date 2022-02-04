@@ -194,3 +194,15 @@ variable "transaction_log_retention_days" {
   type        = number
   default     = null
 }
+
+variable "kubernetes_service_name" {
+  description = "Name of kubernetes service"
+  type        = string
+  default     = "cloudsql"
+}
+
+variable "sqlproxy_service_account_name" {
+  description = "SQL instance service account name"
+  type        = string
+  default     = null
+}
