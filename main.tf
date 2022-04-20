@@ -77,6 +77,9 @@ resource "google_sql_database_instance" "default" {
     tier              = var.instance_tier
     availability_type = var.availability_type
 
+    disk_autoresize       = var.disk_autoresize
+    disk_autoresize_limit = var.disk_autoresize_limit
+
     backup_configuration {
       enabled                        = true
       start_time                     = var.backup_start_time
@@ -141,6 +144,9 @@ resource "google_sql_database_instance" "read_replica" {
   settings {
     tier              = lookup(each.value, "instance_tier", "db-custom-1-3840")
     availability_type = "ZONAL"
+
+    disk_autoresize       = var.disk_autoresize
+    disk_autoresize_limit = var.disk_autoresize_limit
 
     backup_configuration {
       enabled = false

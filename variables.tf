@@ -206,3 +206,15 @@ variable "sqlproxy_service_account_name" {
   type        = string
   default     = null
 }
+
+variable "disk_autoresize" {
+  description = "Configuration to increase storage size automatically"
+  type        = bool
+  default     = true
+}
+
+variable "disk_autoresize_limit" {
+  description = "Limit of disk space for autoresize"
+  type        = number
+  default     = 0
+}
