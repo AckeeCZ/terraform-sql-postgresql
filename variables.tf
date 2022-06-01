@@ -111,6 +111,18 @@ variable "database_flags" {
   type        = map(string)
 }
 
+variable "writer_database_flags" {
+  description = "Same as database_flags but applies only for writer"
+  default     = {}
+  type        = map(string)
+}
+
+variable "reader_database_flags" {
+  description = "Same as database_flags but applies only for reader"
+  default     = {}
+  type        = map(string)
+}
+
 variable "enable_query_insights" {
   description = "Enable query insights https://cloud.google.com/sql/docs/postgres/insights-overview"
   default     = true

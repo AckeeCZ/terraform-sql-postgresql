@@ -98,7 +98,7 @@ resource "google_sql_database_instance" "default" {
     }
 
     dynamic "database_flags" {
-      for_each = local.database_flags
+      for_each = merge(local.database_flags, var.writer_database_flags)
       content {
         name  = database_flags.key
         value = database_flags.value
@@ -153,7 +153,7 @@ resource "google_sql_database_instance" "read_replica" {
     }
 
     dynamic "database_flags" {
-      for_each = local.database_flags
+      for_each = merge(local.database_flags, var.reader_database_flags)
       content {
         name  = database_flags.key
         value = database_flags.value

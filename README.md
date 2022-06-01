@@ -143,6 +143,7 @@ No modules.
 | <a name="input_query_string_length_insights"></a> [query\_string\_length\_insights](#input\_query\_string\_length\_insights) | Insights maximum query length stored in bytes. Between 256 and 4500. Default to 1024. | `number` | `1024` | no |
 | <a name="input_random_id_length"></a> [random\_id\_length](#input\_random\_id\_length) | Byte length of random ID, used as suffix in SQL name | `number` | `4` | no |
 | <a name="input_read_replicas"></a> [read\_replicas](#input\_read\_replicas) | Map of maps containing name as a key of read\_replicas mapa and settings some parameters of read replica. For more information see README part Read replica | `map` | `{}` | no |
+| <a name="input_reader_database_flags"></a> [reader\_database\_flags](#input\_reader\_database\_flags) | Same as database\_flags but applies only for reader | `map(string)` | `{}` | no |
 | <a name="input_region"></a> [region](#input\_region) | GCP region | `string` | `"europe-west3"` | no |
 | <a name="input_sqlproxy_dependencies"></a> [sqlproxy\_dependencies](#input\_sqlproxy\_dependencies) | If set to true, we will create dependencies for running SQLproxy - GCP IAM SA, Kubernetes secret and Kubernetes Service | `bool` | `true` | no |
 | <a name="input_sqlproxy_service_account_name"></a> [sqlproxy\_service\_account\_name](#input\_sqlproxy\_service\_account\_name) | SQL instance service account name | `string` | `null` | no |
@@ -150,6 +151,7 @@ No modules.
 | <a name="input_user_labels"></a> [user\_labels](#input\_user\_labels) | Labels to the instance | `map(string)` | `{}` | no |
 | <a name="input_user_suffix"></a> [user\_suffix](#input\_user\_suffix) | Suffix - used, for instance, when you create a clone. Should include starting dash | `string` | `""` | no |
 | <a name="input_vault_secret_path"></a> [vault\_secret\_path](#input\_vault\_secret\_path) | Path to secret in local vault, used mainly to save gke credentials | `string` | n/a | yes |
+| <a name="input_writer_database_flags"></a> [writer\_database\_flags](#input\_writer\_database\_flags) | Same as database\_flags but applies only for writer | `map(string)` | `{}` | no |
 | <a name="input_zone"></a> [zone](#input\_zone) | The preferred compute engine zone | `string` | `"europe-west3-c"` | no |
 
 ## Outputs
