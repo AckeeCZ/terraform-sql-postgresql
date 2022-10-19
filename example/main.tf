@@ -50,7 +50,7 @@ module "postgresql" {
 }
 
 module "gke" {
-  source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v10.0.0"
+  source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v11.9.1"
   cluster_name      = "postgresql-cluster-test"
   namespace         = var.namespace
   project           = var.project
