@@ -10,6 +10,12 @@ variable "region" {
   type        = string
 }
 
+variable "secondary_zone" {
+  description = "secondary GCP region preference"
+  default     = null
+  type        = string
+}
+
 variable "project" {
   description = "GCP project name"
   type        = string

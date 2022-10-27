@@ -144,6 +144,7 @@ No modules.
 | <a name="input_random_id_length"></a> [random\_id\_length](#input\_random\_id\_length) | Byte length of random ID, used as suffix in SQL name | `number` | `4` | no |
 | <a name="input_read_replicas"></a> [read\_replicas](#input\_read\_replicas) | Map of maps containing name as a key of read\_replicas mapa and settings some parameters of read replica. For more information see README part Read replica | `map` | `{}` | no |
 | <a name="input_region"></a> [region](#input\_region) | GCP region | `string` | `"europe-west3"` | no |
+| <a name="input_secondary_zone"></a> [secondary\_zone](#input\_secondary\_zone) | secondary GCP region preference | `string` | `null` | no |
 | <a name="input_sqlproxy_dependencies"></a> [sqlproxy\_dependencies](#input\_sqlproxy\_dependencies) | If set to true, we will create dependencies for running SQLproxy - GCP IAM SA, Kubernetes secret and Kubernetes Service | `bool` | `true` | no |
 | <a name="input_sqlproxy_service_account_name"></a> [sqlproxy\_service\_account\_name](#input\_sqlproxy\_service\_account\_name) | SQL instance service account name | `string` | `null` | no |
 | <a name="input_transaction_log_retention_days"></a> [transaction\_log\_retention\_days](#input\_transaction\_log\_retention\_days) | The number of days of transaction logs we retain for point in time restore, from 1-7. | `number` | `null` | no |
