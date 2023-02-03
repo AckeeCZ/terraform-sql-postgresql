@@ -15,6 +15,7 @@ locals {
   database_flags = merge({
     log_min_duration_statement : var.log_min_duration_statement
   }, var.database_flags)
+  kubernetes_stuff = (var.provision_kubernetes_resources && var.private_ip)
 }
 
 resource "google_project_service" "enable_sqladmin_api" {

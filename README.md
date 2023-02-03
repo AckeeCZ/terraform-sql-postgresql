@@ -118,9 +118,9 @@ No modules.
 | <a name="input_backup_location"></a> [backup\_location](#input\_backup\_location) | Location of backups | `string` | `"eu"` | no |
 | <a name="input_backup_start_time"></a> [backup\_start\_time](#input\_backup\_start\_time) | The time, when backup starts | `string` | `"03:00"` | no |
 | <a name="input_cloudsql_port"></a> [cloudsql\_port](#input\_cloudsql\_port) | CloudSQL's port | `number` | `5432` | no |
-| <a name="input_cluster_ca_certificate"></a> [cluster\_ca\_certificate](#input\_cluster\_ca\_certificate) | Public CA certificate that is the root of trust for the GKE K8s cluster | `string` | n/a | yes |
-| <a name="input_cluster_endpoint"></a> [cluster\_endpoint](#input\_cluster\_endpoint) | Cluster control plane endpoint | `string` | n/a | yes |
-| <a name="input_cluster_token"></a> [cluster\_token](#input\_cluster\_token) | Cluster master token, keep always secret! | `string` | n/a | yes |
+| <a name="input_cluster_ca_certificate"></a> [cluster\_ca\_certificate](#input\_cluster\_ca\_certificate) | Public CA certificate that is the root of trust for the GKE K8s cluster | `string` | `null` | no |
+| <a name="input_cluster_endpoint"></a> [cluster\_endpoint](#input\_cluster\_endpoint) | Cluster control plane endpoint | `string` | `"example.com:8080"` | no |
+| <a name="input_cluster_token"></a> [cluster\_token](#input\_cluster\_token) | Cluster master token, keep always secret! | `string` | `null` | no |
 | <a name="input_database_flags"></a> [database\_flags](#input\_database\_flags) | The optional settings.database\_flags list of values, where key is name and value is value from documentation: https://www.terraform.io/docs/providers/google/r/sql_database_instance.html | `map(string)` | `{}` | no |
 | <a name="input_db_version"></a> [db\_version](#input\_db\_version) | Database version | `string` | `"POSTGRES_11"` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Whether or not to allow Terraform to destroy the instance. Unless this field is set to false in Terraform state, a terraform destroy or terraform apply command that deletes the instance will fail. | `bool` | `true` | no |
@@ -139,6 +139,7 @@ No modules.
 | <a name="input_point_in_time_recovery"></a> [point\_in\_time\_recovery](#input\_point\_in\_time\_recovery) | Enable Point-in-time recovery (effectively turns on WAL) | `bool` | `false` | no |
 | <a name="input_private_ip"></a> [private\_ip](#input\_private\_ip) | If set to true, private IP address will get allocated and connect it to VPC network set in `var.network` in the project -- once enabled, this can't be turned off. | `bool` | `false` | no |
 | <a name="input_project"></a> [project](#input\_project) | GCP project name | `string` | n/a | yes |
+| <a name="input_provision_kubernetes_resources"></a> [provision\_kubernetes\_resources](#input\_provision\_kubernetes\_resources) | Should we provision anything that needs Kubernetes? | `bool` | `true` | no |
 | <a name="input_public_ip"></a> [public\_ip](#input\_public\_ip) | If set to true, public IP address will get allocated | `bool` | `false` | no |
 | <a name="input_query_string_length_insights"></a> [query\_string\_length\_insights](#input\_query\_string\_length\_insights) | Insights maximum query length stored in bytes. Between 256 and 4500. Default to 1024. | `number` | `1024` | no |
 | <a name="input_random_id_length"></a> [random\_id\_length](#input\_random\_id\_length) | Byte length of random ID, used as suffix in SQL name | `number` | `4` | no |

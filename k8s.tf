@@ -1,5 +1,5 @@
 resource "kubernetes_endpoints" "cloudsql" {
-  count = var.private_ip ? 1 : 0
+  count = local.kubernetes_stuff ? 1 : 0
 
   metadata {
     name      = var.kubernetes_service_name
@@ -18,7 +18,7 @@ resource "kubernetes_endpoints" "cloudsql" {
 }
 
 resource "kubernetes_service" "cloudsql" {
-  count = var.private_ip ? 1 : 0
+  count = local.kubernetes_stuff ? 1 : 0
 
   metadata {
     name      = var.kubernetes_service_name

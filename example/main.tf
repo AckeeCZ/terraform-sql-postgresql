@@ -10,22 +10,20 @@ provider "postgresql" {
 }
 
 module "postgresql" {
-  source                 = "../"
-  project                = var.project
-  region                 = var.region
-  zone                   = var.zone
-  namespace              = var.namespace
-  cluster_ca_certificate = module.gke.cluster_ca_certificate
-  cluster_token          = module.gke.access_token
-  cluster_endpoint       = module.gke.endpoint
-  environment            = "production"
-  availability_type      = "REGIONAL" # REGIONAL for HA setup, ZONAL for single zone
-  vault_secret_path      = "secret/devops/production/${var.project}/${var.environment}"
-  private_ip             = true
-  public_ip              = true
-  sqlproxy_dependencies  = false
-  point_in_time_recovery = true
-  deletion_protection    = false
+  source                         = "../"
+  project                        = var.project
+  region                         = var.region
+  zone                           = var.zone
+  namespace                      = var.namespace
+  environment                    = "production"
+  availability_type              = "REGIONAL" # REGIONAL for HA setup, ZONAL for single zone
+  vault_secret_path              = "secret/devops/production/${var.project}/${var.environment}"
+  private_ip                     = true
+  public_ip                      = true
+  sqlproxy_dependencies          = false
+  provision_kubernetes_resources = false
+  point_in_time_recovery         = true
+  deletion_protection            = false
   authorized_networks = [
     {
       name : "office"
@@ -47,18 +45,6 @@ module "postgresql" {
   database_flags = {
     log_connections : "on"
   }
-}
-
-module "gke" {
-  source            = "git::ssh://git@gitlab.ack.ee/Infra/terraform-gke-vpc.git?ref=v11.9.1"
-  cluster_name      = "postgresql-cluster-test"
-  namespace         = var.namespace
-  project           = var.project
-  location          = var.zone
-  vault_secret_path = var.vault_secret_path
-  private           = false
-  min_nodes         = 1
-  max_nodes         = 2
 }
 
 output "psql_ip" {
