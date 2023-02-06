@@ -4,9 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v5.9.0] - 2023-02-06
+### Added
+- `name_override` parameter allowing to define final instance name
+- `password_special` paramater allowing to create Cloud SQL users password without special characters
+
 ## [v5.8.0] - 2023-02-03
 ### Added
-- add `provision_kubernetes_resources` variable, which, when set to false, allows us to provision instance without Kubernetes resources.
+- `provision_kubernetes_resources` variable, which, when set to false, allows us to provision instance without Kubernetes resources.
 This is useful, for example, when provisioning Postgres to project with Cloud Run.
 
 ## [v5.7.0] - 2022-10-27

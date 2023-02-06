@@ -180,6 +180,12 @@ variable "password_length" {
   type        = number
 }
 
+variable "password_special" {
+  description = "Use special characters for passwords of postgres users"
+  default     = true
+  type        = bool
+}
+
 variable "log_min_duration_statement" {
   description = "Causes the duration of each completed statement to be logged if the statement ran for at least the specified number of milliseconds."
   default     = "300"
@@ -232,4 +238,10 @@ variable "provision_kubernetes_resources" {
   description = "Should we provision anything that needs Kubernetes?"
   type        = bool
   default     = true
+}
+
+variable "name_override" {
+  description = "Sets complete CloudSQL instance name"
+  type        = string
+  default     = null
 }
