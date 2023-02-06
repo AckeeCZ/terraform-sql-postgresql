@@ -10,7 +10,7 @@ locals {
   instance_name                 = var.name_override == null ? "${var.project}-${var.environment}-${random_id.instance_name_suffix.hex}${var.user_suffix}" : var.name_override
   sqlproxy_service_account_name = var.sqlproxy_service_account_name == null ? substr("sqlproxy-postgres-${var.environment}", 0, 30) : var.sqlproxy_service_account_name
   project_name_normalized       = replace(var.project, "-", "_")
-  postgres_database_name        = local.project_name_normalized
+  postgres_database_name        = var.default_dbname_override == null ? local.project_name_normalized : var.default_dbname_override
   postgres_database_user        = local.postgres_database_name
   database_flags = merge({
     log_min_duration_statement : var.log_min_duration_statement

@@ -123,6 +123,7 @@ No modules.
 | <a name="input_cluster_token"></a> [cluster\_token](#input\_cluster\_token) | Cluster master token, keep always secret! | `string` | `null` | no |
 | <a name="input_database_flags"></a> [database\_flags](#input\_database\_flags) | The optional settings.database\_flags list of values, where key is name and value is value from documentation: https://www.terraform.io/docs/providers/google/r/sql_database_instance.html | `map(string)` | `{}` | no |
 | <a name="input_db_version"></a> [db\_version](#input\_db\_version) | Database version | `string` | `"POSTGRES_11"` | no |
+| <a name="input_default_dbname_override"></a> [default\_dbname\_override](#input\_default\_dbname\_override) | Overrides default postgres database name | `string` | `null` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Whether or not to allow Terraform to destroy the instance. Unless this field is set to false in Terraform state, a terraform destroy or terraform apply command that deletes the instance will fail. | `bool` | `true` | no |
 | <a name="input_disk_autoresize"></a> [disk\_autoresize](#input\_disk\_autoresize) | Configuration to increase storage size automatically | `bool` | `true` | no |
 | <a name="input_disk_autoresize_limit"></a> [disk\_autoresize\_limit](#input\_disk\_autoresize\_limit) | Limit of disk space for autoresize | `number` | `0` | no |

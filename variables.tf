@@ -245,3 +245,9 @@ variable "name_override" {
   type        = string
   default     = null
 }
+
+variable "default_dbname_override" {
+  description = "Overrides default postgres database name"
+  type        = string
+  default     = null
+}
