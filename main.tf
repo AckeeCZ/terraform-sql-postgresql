@@ -7,7 +7,7 @@ resource "random_id" "instance_name_suffix" {
 }
 
 locals {
-  instance_name                 = "${var.project}-${var.environment}-${random_id.instance_name_suffix.hex}${var.user_suffix}"
+  instance_name                 = var.name_override == null ? "${var.project}-${var.environment}-${random_id.instance_name_suffix.hex}${var.user_suffix}" : var.name_override
   sqlproxy_service_account_name = var.sqlproxy_service_account_name == null ? substr("sqlproxy-postgres-${var.environment}", 0, 30) : var.sqlproxy_service_account_name
   project_name_normalized       = replace(var.project, "-", "_")
   postgres_database_name        = local.project_name_normalized
@@ -195,14 +195,14 @@ resource "google_sql_database_instance" "read_replica" {
 
 resource "random_password" "postgres_postgres" {
   length           = var.password_length
-  special          = true
-  override_special = "/@_%"
+  special          = var.password_special
+  override_special = var.password_special ? "/@_%" : null
 }
 
 resource "random_password" "postgres_default" {
   length           = var.password_length
-  special          = true
-  override_special = "/@_%"
+  special          = var.password_special
+  override_special = var.password_special ? "/@_%" : null
 }
 
 resource "google_sql_user" "postgres" {
