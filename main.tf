@@ -155,7 +155,7 @@ resource "google_sql_database_instance" "read_replica" {
     }
 
     dynamic "database_flags" {
-      for_each = local.database_flags
+      for_each = lookup(each.value, "database_flags", local.database_flags)
       content {
         name  = database_flags.key
         value = database_flags.value
@@ -163,7 +163,7 @@ resource "google_sql_database_instance" "read_replica" {
     }
 
     dynamic "insights_config" {
-      for_each = var.enable_query_insights ? [1] : []
+      for_each = lookup(each.value, "enable_query_insights", var.enable_query_insights) ? [1] : []
       content {
         query_insights_enabled  = var.enable_query_insights
         query_string_length     = var.query_string_length_insights
