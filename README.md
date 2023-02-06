@@ -133,9 +133,11 @@ No modules.
 | <a name="input_log_min_duration_statement"></a> [log\_min\_duration\_statement](#input\_log\_min\_duration\_statement) | Causes the duration of each completed statement to be logged if the statement ran for at least the specified number of milliseconds. | `string` | `"300"` | no |
 | <a name="input_maintenance_window_day"></a> [maintenance\_window\_day](#input\_maintenance\_window\_day) | The day, when maintenance window will be performed | `string` | `"7"` | no |
 | <a name="input_maintenance_window_hour"></a> [maintenance\_window\_hour](#input\_maintenance\_window\_hour) | The hour, when maintenance window begins | `string` | `"4"` | no |
+| <a name="input_name_override"></a> [name\_override](#input\_name\_override) | Sets complete CloudSQL instance name | `string` | `null` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | K8s namespace to where insert Cloud SQL credentials secrets | `string` | `"production"` | no |
 | <a name="input_network"></a> [network](#input\_network) | GCE VPC used for possible private IP addresses | `string` | `"default"` | no |
 | <a name="input_password_length"></a> [password\_length](#input\_password\_length) | Password length of postgres users | `number` | `16` | no |
+| <a name="input_password_special"></a> [password\_special](#input\_password\_special) | Use special characters for passwords of postgres users | `bool` | `true` | no |
 | <a name="input_point_in_time_recovery"></a> [point\_in\_time\_recovery](#input\_point\_in\_time\_recovery) | Enable Point-in-time recovery (effectively turns on WAL) | `bool` | `false` | no |
 | <a name="input_private_ip"></a> [private\_ip](#input\_private\_ip) | If set to true, private IP address will get allocated and connect it to VPC network set in `var.network` in the project -- once enabled, this can't be turned off. | `bool` | `false` | no |
 | <a name="input_project"></a> [project](#input\_project) | GCP project name | `string` | n/a | yes |
@@ -158,6 +160,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_instance_connection_name"></a> [instance\_connection\_name](#output\_instance\_connection\_name) | PSQL instance connection name |
+| <a name="output_instance_name"></a> [instance\_name](#output\_instance\_name) | PSQL instance name |
 | <a name="output_postgres_default_password"></a> [postgres\_default\_password](#output\_postgres\_default\_password) | PSQL password to default user |
 | <a name="output_postgres_instance_connection_name"></a> [postgres\_instance\_connection\_name](#output\_postgres\_instance\_connection\_name) | PSQL instance connection name |
 | <a name="output_postgres_instance_ip_settings"></a> [postgres\_instance\_ip\_settings](#output\_postgres\_instance\_ip\_settings) | PSQL instance IP address settings |
