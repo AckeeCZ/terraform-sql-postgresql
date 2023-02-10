@@ -186,12 +186,6 @@ variable "password_special" {
   type        = bool
 }
 
-variable "log_min_duration_statement" {
-  description = "Causes the duration of each completed statement to be logged if the statement ran for at least the specified number of milliseconds."
-  default     = "300"
-  type        = string
-}
-
 variable "cloudsql_port" {
   description = "CloudSQL's port"
   default     = 5432
