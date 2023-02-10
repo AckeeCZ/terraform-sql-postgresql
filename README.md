@@ -131,7 +131,6 @@ No modules.
 | <a name="input_environment"></a> [environment](#input\_environment) | Project enviroment, e.g. stage, production and development | `string` | `"development"` | no |
 | <a name="input_instance_tier"></a> [instance\_tier](#input\_instance\_tier) | The machine type to use | `string` | `"db-custom-1-3840"` | no |
 | <a name="input_kubernetes_service_name"></a> [kubernetes\_service\_name](#input\_kubernetes\_service\_name) | Name of kubernetes service | `string` | `"cloudsql"` | no |
-| <a name="input_log_min_duration_statement"></a> [log\_min\_duration\_statement](#input\_log\_min\_duration\_statement) | Causes the duration of each completed statement to be logged if the statement ran for at least the specified number of milliseconds. | `string` | `"300"` | no |
 | <a name="input_maintenance_window_day"></a> [maintenance\_window\_day](#input\_maintenance\_window\_day) | The day, when maintenance window will be performed | `string` | `"7"` | no |
 | <a name="input_maintenance_window_hour"></a> [maintenance\_window\_hour](#input\_maintenance\_window\_hour) | The hour, when maintenance window begins | `string` | `"4"` | no |
 | <a name="input_name_override"></a> [name\_override](#input\_name\_override) | Sets complete CloudSQL instance name | `string` | `null` | no |

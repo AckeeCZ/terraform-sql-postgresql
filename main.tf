@@ -12,10 +12,8 @@ locals {
   project_name_normalized       = replace(var.project, "-", "_")
   postgres_database_name        = var.default_dbname_override == null ? local.project_name_normalized : var.default_dbname_override
   postgres_database_user        = local.postgres_database_name
-  database_flags = merge({
-    log_min_duration_statement : var.log_min_duration_statement
-  }, var.database_flags)
-  kubernetes_stuff = (var.provision_kubernetes_resources && var.private_ip)
+  database_flags                = var.database_flags
+  kubernetes_stuff              = (var.provision_kubernetes_resources && var.private_ip)
 }
 
 resource "google_project_service" "enable_sqladmin_api" {
